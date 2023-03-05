@@ -190,10 +190,14 @@ class MoviesController extends Controller
 	    $movie->streaming_link = NULL;
 	    if ($movie->status == 0) {
 	        $streaming = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/' . $movie->tmdb_id . '/watch/providers?api_key=4b71bb38fff24b54a79276a70dd07af3'));
-		if (isset($streaming->results) && isset($streaming->results->GB)) {
-		  $movie->streaming_link = $streaming->results->GB->link;
-                  $movie->streaming = $streaming->results->GB->flatrate;
-		}
+			if (isset($streaming->results) && isset($streaming->results->GB)) {
+				if (isset( $streaming->results->GB->link)) {
+					$movie->streaming_link = $streaming->results->GB->link;
+				}
+				if (isset( $streaming->results->GB->flatrate)) {
+					$movie->streaming = $streaming->results->GB->flatrate;
+				}
+			}
 	    }
 	    $movie_details = $movie;
 	    return view('movieDetails', compact('movie_details'));
