@@ -115,9 +115,6 @@ class MoviesController extends Controller
 		       ->where('ml.list_id', $request['list']);
 	       $list = $request['list'];	
 	    }
-	    if ($status == 1) {
-		  $movies_q = $movies_q->where('4k', '=', 1);
-	    }
 	    $orderBy = 'rd_asc';
             if (isset($request['orderBy']) && !empty($request['orderBy'])) {
 	       $orderBy = $request['orderBy'];	
