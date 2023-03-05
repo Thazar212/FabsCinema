@@ -30,7 +30,7 @@
 		@endif
 		href="/steelbook">Steelbook Collection</a></li>
 		<li><a  
-		@if ($aMovies['movie_list'][0] && 
+		@if (isset($aMovies['movie_list'][0]) && 
 		$aMovies['movie_list'][0]['steelbook'] == 0  && 
 		$aMovies['movie_list'][0]['4k'] == 0 &&  
 		$aMovies['movie_list'][0]['status'] == 1) 
@@ -38,7 +38,7 @@
 		@endif
 		href="/blurays">Blu-ray Collection</a></li>
 		<li><a  
-		@if ($aMovies['movie_list'][0] && 
+		@if (isset($aMovies['movie_list'][0]) && 
 		$aMovies['movie_list'][0]['steelbook'] == 0  && 
 		$aMovies['movie_list'][0]['4k'] == 1 &&  
 		$aMovies['movie_list'][0]['status'] == 1) 
@@ -46,14 +46,14 @@
 		@endif
 		href="/4k">4K Collection</a></li>
 		<li><a  
-		@if ($aMovies['movie_list'][0] && 
+		@if (isset($aMovies['movie_list'][0]) && 
 		$aMovies['movie_list'][0]['4k'] == 0 &&  
 		$aMovies['movie_list'][0]['status'] == 0) 
 			class="active"
 		@endif
 		href="/wanted-blurays">Wanted Blu-rays</a></li>
 		<li><a  
-		@if ($aMovies['movie_list'][0] && 
+		@if (isset($aMovies['movie_list'][0]) &&
 		$aMovies['movie_list'][0]['4k'] == 1 &&  
 		$aMovies['movie_list'][0]['status'] == 0) 
 			class="active"
