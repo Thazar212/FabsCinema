@@ -26,7 +26,7 @@ $router->get('/4k', ['as' => '4k', 'uses' => 'MoviesController@MyMovies4k']);
 $router->get('/blu-rays', ['as' => 'br', 'uses' => 'MoviesController@MyMoviesBR']);
 $router->get('/steelbooks', ['as' => 'steel', 'uses' => 'MoviesController@MyMoviesSteel']);
 $router->get('/wanted-4k', ['as' => 'wanted4k', 'uses' => 'MoviesController@Wanted4k']);
-$router->get('/wanted-blu-rays', ['as' => 'wantedbr', 'uses' => 'MoviesController@WantedBR']);
+$router->get('/wanted-blurays', ['as' => 'wantedbr', 'uses' => 'MoviesController@WantedBR']);
 
 $router->get('/movie_detail/{movie_id}', ['as' => 'movieDetail', 'uses' => 'MoviesController@MovieDetail']);
 //$router->get('/genres', 'MoviesController@Genres');
