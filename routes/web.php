@@ -24,7 +24,7 @@ $router->get('/coming_soon', function () {
 });
 $router->get('/4k', ['as' => '4k', 'uses' => 'MoviesController@MyMovies4k']);
 $router->get('/blurays', ['as' => 'br', 'uses' => 'MoviesController@MyMoviesBR']);
-$router->get('/steelbooks', ['as' => 'steel', 'uses' => 'MoviesController@MyMoviesSteel']);
+$router->get('/steelbook', ['as' => 'steel', 'uses' => 'MoviesController@MyMoviesSteel']);
 $router->get('/wanted-4k', ['as' => 'wanted4k', 'uses' => 'MoviesController@Wanted4k']);
 $router->get('/wanted-blurays', ['as' => 'wantedbr', 'uses' => 'MoviesController@WantedBR']);
 
