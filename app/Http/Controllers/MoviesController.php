@@ -186,8 +186,8 @@ class MoviesController extends Controller
 		    ->where('m.id', $movie_id)
 		    ->first();
 
-	    $movie->streaming = NULL;
-	    $movie->streaming_link = NULL;
+	    $movie->streaming = [];
+	    $movie->streaming_link = [];
 	    if ($movie->status == 0) {
 	        $streaming = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/' . $movie->tmdb_id . '/watch/providers?api_key=4b71bb38fff24b54a79276a70dd07af3'));
 			if (isset($streaming->results) && isset($streaming->results->GB)) {
