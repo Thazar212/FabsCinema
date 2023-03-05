@@ -86,7 +86,7 @@ class MoviesController extends Controller
     private function showMovies (Request $request, $status = 0, $fourK = 1, $steelbook = 0) {
 	    $n = 1;
 	    $movies_q = DB::table('movies as m')
-		    ->select('m.tmdb_id', 'm.status','m.4k', 'm.steelbook', 'md.*', 'm.id as movie_id')
+		    ->select('m.tmdb_id', 'm.status','m.4k as fourK', 'm.steelbook', 'md.*', 'm.id as movie_id')
 		    ->leftJoin('movieDetails as md', 'md.id', '=', 'm.id');
 	    $search = '';
 		$movies_q = $movies_q->where('status', '=', $status);
@@ -150,12 +150,12 @@ class MoviesController extends Controller
 		   }
 		   $movie_list[] = ['id' => $n,
                            'title' => $movie->title,
-			   'poster' => 'https://image.tmdb.org/t/p/w500' . $movie->poster_path,
-			   'rating' => $movie->rating,
-			   'status' => $movie->status,
-			   '4k' 	=> $movie->4k,
-			   'steelbook' => $movie->steelbook,
-			   'fc_id' => $movie->movie_id,
+			   'poster' 	=> 'https://image.tmdb.org/t/p/w500' . $movie->poster_path,
+			   'rating' 	=> $movie->rating,
+			   'status' 	=> $movie->status,
+			   '4k' 		=> $movie->fourK,
+			   'steelbook' 	=> $movie->steelbook,
+			   'fc_id' 		=> $movie->movie_id,
 		   ];
 		   $n++;
 	    }
