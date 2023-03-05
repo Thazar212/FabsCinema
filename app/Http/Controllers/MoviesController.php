@@ -153,6 +153,8 @@ class MoviesController extends Controller
 			   'poster' => 'https://image.tmdb.org/t/p/w500' . $movie->poster_path,
 			   'rating' => $movie->rating,
 			   'status' => $movie->status,
+			   '4k' 	=> $movie->4k,
+			   'steelbook' => $movie->steelbook,
 			   'fc_id' => $movie->movie_id,
 		   ];
 		   $n++;
