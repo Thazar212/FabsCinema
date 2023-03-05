@@ -14,7 +14,13 @@
 */
 
 $router->get('/', function () {
-	return redirect()->route('nowShowing');
+	return redirect()->route('4k');
+});
+$router->get('/now_showing', function () {
+	return redirect()->route('4k');
+});
+$router->get('/coming_soon', function () {
+	return redirect()->route('wanted4k');
 });
 $router->get('/4k]', ['as' => '4k', 'uses' => 'MoviesController@MyMovies4k']);
 $router->get('/blu-rays]', ['as' => 'br', 'uses' => 'MoviesController@MyMoviesBR']);
