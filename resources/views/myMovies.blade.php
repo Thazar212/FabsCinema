@@ -23,7 +23,7 @@
       <ul>
 	
 		<li><a 
-		@if ($aMovies['movie_list'][0] && 
+		@if (isset($aMovies['movie_list'][0]) && 
 		$aMovies['movie_list'][0]['steelbook'] == 1 &&  
 		$aMovies['movie_list'][0]['status'] == 1)
 			class="active" 
