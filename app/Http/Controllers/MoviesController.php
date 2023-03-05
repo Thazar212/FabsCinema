@@ -4,44 +4,104 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Database\Query\Builder;
 
 class MoviesController extends Controller
 {
     /**
-     * Retrieve the user for the given ID.
+     * Retrieve list of owned 4k movies
      *
-     * @param  int  $id
+     * @param  Request  $request
      * @return Response
      */
-    public function MyMovies(Request $request)
+    public function MyMovies4k(Request $request)
     {
-	   $aMovies = $this->showMovies($request, 1);
-           return view('myMovies', compact('aMovies'));
-  	    
+		$status = 1;
+		$fourK = 1;
+		$steelbook = 0;
+		$aMovies = $this->showMovies($request, $status, $fourK, $steelbook);
+    	return view('myMovies', compact('aMovies'));    
     }
 
-   public function ComingSoon(Request $request)
-   {
-           $aMovies = $this->showMovies($request, 0);
-           return view('myMovies', compact('aMovies'));
-   }
+	/**
+     * Retrieve list of owned blu rays movies
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function MyMoviesBR(Request $request)
+    {
+		$status = 1;
+		$fourK = 0;
+		$steelbook = 0;
+		$aMovies = $this->showMovies($request, $status, $fourK, $steelbook);
+    	return view('myMovies', compact('aMovies'));    
+    }
 
+	/**
+     * Retrieve list of owned Steelbook movies
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function MyMoviesSteel(Request $request)
+    {
+		$status = 1;
+		$fourK = 1;
+		$steelbook = 1;
+		$aMovies = $this->showMovies($request, $status, $fourK, $steelbook);
+    	return view('myMovies', compact('aMovies'));    
+    }
 
-    private function showMovies (Request $request, $status = 0) {
+	/**
+     * Retrieve list of wanted 4k movies
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function Wanted4k(Request $request)
+    {
+		$status = 0;
+		$fourK = 1;
+		$steelbook = 0;
+		$aMovies = $this->showMovies($request, $status, $fourK, $steelbook);
+    	return view('myMovies', compact('aMovies'));    
+    }
+
+	/**
+     * Retrieve list of wanted blu ray movies
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function WantedBR(Request $request)
+    {
+		$status = 0;
+		$fourK = 0;
+		$steelbook = 0;
+		$aMovies = $this->showMovies($request, $status, $fourK, $steelbook);
+    	return view('myMovies', compact('aMovies'));    
+    }
+
+    private function showMovies (Request $request, $status = 0, $fourK = 1, $steelbook = 0) {
 	    $n = 1;
 	    $movies_q = DB::table('movies as m')
-		    ->select('m.tmdb_id', 'm.status', 'md.*', 'm.id as movie_id')
+		    ->select('m.tmdb_id', 'm.status','m.4k', 'm.steelbook', 'md.*', 'm.id as movie_id')
 		    ->leftJoin('movieDetails as md', 'md.id', '=', 'm.id');
 	    $search = '';
+		$movies_q = $movies_q->where('status', '=', $status);
 	    if (isset($request['search']) && !empty($request['search'])) {
 		    $search = urldecode($request['search']);
 		    $search_string = '%' . $search .'%';
-		    $movies_q = $movies_q->where('title', 'like', $search_string )
+		    $movies_q = $movies_q->->where(function (Builder $query) {
+				$query->where('title', 'like', $search_string )
 			   ->orWhere(DB::raw('convert(cast_members using latin1)'), 'like', $search_string)
 		   	   ->orWhere('director', 'like', $search_string);
+	    } elseif ($steelbook == 1) {
+		    $movies_q = $movies_q->where('steelbook', '=', 1);
 	    } else {
-		    $movies_q = $movies_q->where('status', $status);
-	    }
+			$movies_q = $movies_q->where('4k', '=', $fourK);
+		}
 	    $genre = '';
 	    if (isset($request['genre']) && !empty($request['genre'])) {
 		$movies_q = $movies_q->leftJoin('movie_genre as mg', 'mg.movie_id', '=', 'm.id')

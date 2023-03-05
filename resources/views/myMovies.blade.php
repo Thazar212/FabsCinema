@@ -21,13 +21,39 @@
     <h1 id="logo"><a href="#">FAB'S CINEMA</a></h1>
     <div id="navigation">
       <ul>
-	@if (isset($aMovies['movie_list'][0]) and $aMovies['movie_list'][0]['status'] == 1)
-            <li><a class="active" href="/now_showing">NOW SHOWING</a></li>
-    	    <li><a href="/coming_soon">COMING SOON</a></li>
-        @else
-	    <li><a href="/now_showing">NOW SHOWING</a></li>
-            <li><a class="active" href="/coming_soon">COMING SOON</a></li>
-        @endif 
+	
+		<li><a 
+		@if ($aMovies['movie_list'][0]['steelbook'] == 1 &&  
+		$aMovies['movie_list'][0]['status'] == 1)
+			class="active" 
+		@endif
+		href="/steelbook">Steelbook Collection</a></li>
+		<li><a  
+		@if ($aMovies['movie_list'][0]['steelbook'] == 0  && 
+		$aMovies['movie_list'][0]['4k'] == 0 &&  
+		$aMovies['movie_list'][0]['status'] == 1) 
+			class="active"
+		@endif
+		href="/blurays">Blu-ray Collection</a></li>
+		<li><a  
+		@if ($aMovies['movie_list'][0]['steelbook'] == 0  && 
+		$aMovies['movie_list'][0]['4k'] == 1 &&  
+		$aMovies['movie_list'][0]['status'] == 1) 
+			class="active"
+		@endif
+		href="/4k">4K Collection</a></li>
+		<li><a  
+		@if ($aMovies['movie_list'][0]['4k'] == 0 &&  
+		$aMovies['movie_list'][0]['status'] == 0) 
+			class="active"
+		@endif
+		href="/wanted-blurays">Wanted Blu-rays</a></li>
+		<li><a  
+		@if ($aMovies['movie_list'][0]['4k'] == 1 &&  
+		$aMovies['movie_list'][0]['status'] == 0) 
+			class="active"
+		@endif
+		href="/wanted-4k">Wanted 4k</a></li>
       </ul>
     </div>
     <div id="sub-navigation">
