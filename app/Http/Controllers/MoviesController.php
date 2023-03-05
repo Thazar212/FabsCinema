@@ -93,7 +93,7 @@ class MoviesController extends Controller
 	    if (isset($request['search']) && !empty($request['search'])) {
 		    $search = urldecode($request['search']);
 		    $search_string = '%' . $search .'%';
-		    $movies_q = $movies_q->->where(function (Builder $query) {
+		    $movies_q = $movies_q->where(function (Builder $query) {
 				$query->where('title', 'like', $search_string )
 			   ->orWhere(DB::raw('convert(cast_members using latin1)'), 'like', $search_string)
 		   	   ->orWhere('director', 'like', $search_string);
