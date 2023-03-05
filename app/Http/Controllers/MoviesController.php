@@ -97,6 +97,7 @@ class MoviesController extends Controller
 				$query->where('title', 'like', $search_string )
 			   ->orWhere(DB::raw('convert(cast_members using latin1)'), 'like', $search_string)
 		   	   ->orWhere('director', 'like', $search_string);
+			});
 	    } elseif ($steelbook == 1) {
 		    $movies_q = $movies_q->where('steelbook', '=', 1);
 	    } else {
