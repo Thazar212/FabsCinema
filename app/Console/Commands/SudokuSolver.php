@@ -111,7 +111,7 @@ class SudokuSolver extends Command
             66 => 9, 67 => 6, 69 => 2,
             75 => 8, 79 => 1, 81 => 9,
         ];
-
+        
         $sol7 = [ //medium - sort
             1  => 5, 2  => 8, 3  => 4, 4  => 2, 5  => 6,  6  => 9, 7  => 7, 8  => 1, 9  => 3,
             10 => 6, 11 => 7, 12 => 3, 13 => 8, 14 => 4, 15 => 1, 16 => 2, 17 => 9, 18 => 5,
@@ -123,7 +123,7 @@ class SudokuSolver extends Command
             66 => 9, 67 => 6, 69 => 2,
             75 => 8, 79 => 1, 81 => 9,
         ];
-        $sol = $sol7;
+        $sol = $sol6;
         $t = true;
         while ($t) {
             $t = false;
@@ -147,6 +147,14 @@ class SudokuSolver extends Command
                         }
                     }
                 }
+                if ($t === true) {
+                    echo "continue";
+                    continue;
+                    echo "badaboom";
+                } else {
+                    echo "stop";
+                }
+
             } 
         }
         ksort($sol);
