@@ -165,6 +165,8 @@ class SudokuSolver extends Command
                     $counts['cells'][$i][$j] = 0;
                 }
             }
+            print_r($counts['rows']);
+            exit();
             foreach($grid as $k => $v) {
                 $cols[$v['column']][$k] = $v['values'];
                 $rows[$v['row']][$k]    = $v['values'];
