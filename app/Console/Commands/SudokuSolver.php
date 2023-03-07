@@ -179,7 +179,7 @@ class SudokuSolver extends Command
                     }
                 }
             }
-            print_r($rows);
+            print_r($rows[3]);
             
             print("\n");
             print_r($counts['rows'][3]);
