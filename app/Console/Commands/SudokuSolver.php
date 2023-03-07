@@ -91,7 +91,7 @@ class SudokuSolver extends Command
             foreach($grid as $k => $c) {
                 if ($c['column'] == $col || $c['row'] == $row || $c['cell'] == $cel ) {
                     $values = $this->turnOffK($c['values'], $value);
-                    $pos = findPosition($values);
+                    $pos = $this->findPosition($values);
                     if ($pos === -1) {
                         $grid[$k]['values'] = $values;
                     } else {
