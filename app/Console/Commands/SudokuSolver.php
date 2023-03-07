@@ -27,8 +27,17 @@ class SudokuSolver extends Command
      */
     public function handle()
     {
-        echo "hello world";
+        $grid = [];
+        for ($i = 1; $i <= 81; $i++) {
+            $grid[$i] = [
+                'column'    => ceil($i / 9),
+                'row'       => $i % 9,
+                'cell'      => 0,
+                'values'    => decbin(511),
+            ];
+        }
         
+        print_r($grid);
     }
 
     
