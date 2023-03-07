@@ -181,18 +181,54 @@ class SudokuSolver extends Command
             foreach ($counts['cols'] as $column => $columnValue) {
                 foreach ($columnValue as $index => $count) {
                     if ($count === 1) {
-                        print ("Column: {$column}, Index: {$index}, Count: {$count}\n" );
                         foreach ($cols[$column] as $cellNum => $cellValue) {
+                            if ($this->isKthBitSet($cellValue, $index - 1)) {
+                                $t = true;
+                                $sol[$cellNum] = $index;
+                                unset($grid[$cellNum]);
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            if ($t === true) {
+                continue;
+            }
+            foreach ($counts['rows'] as $rowIndex => $rowValue) {
+                foreach ($rowValue as $index => $count) {
+                    if ($count === 1) {
+                        foreach ($rows[$rowIndex] as $cellNum => $cellValue) {
+                            if ($this->isKthBitSet($cellValue, $index - 1)) {
+                                $t = true;
+                                $sol[$cellNum] = $index;
+                                unset($grid[$cellNum]);
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            if ($t === true) {
+                continue;
+            }
+            foreach ($counts['cells'] as $cellIndex => $celValue) {
+                foreach ($celValue as $index => $count) {
+                    if ($count === 1) {
+                        foreach ($cells[$cellIndex] as $cellNum => $cellValue) {
                             if ($this->isKthBitSet($cellValue, $index - 1)) {
                                 print("{$cellNum} => {$index} \n");
                                 $t = true;
                                 $sol[$cellNum] = $index;
                                 unset($grid[$cellNum]);
-                                break;
                             }
                         }
+                        
                     }
                 }
+            }
+            if ($t === true) {
+                continue;
             }
 
         }
