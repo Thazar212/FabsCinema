@@ -147,15 +147,14 @@ class SudokuSolver extends Command
                         }
                     }
                 }
-                if ($t === true) {
-                    echo "continue";
-                    continue;
-                    echo "badaboom";
-                } else {
-                    echo "stop";
-                }
-
             } 
+            if ($t === true) {
+                echo "continue";
+                continue;
+                echo "badaboom";
+            } else {
+                echo "stop";
+            }
         }
         ksort($sol);
         print_r($sol);
