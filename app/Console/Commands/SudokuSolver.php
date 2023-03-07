@@ -81,32 +81,33 @@ class SudokuSolver extends Command
             81 => 9,
 
         ];
-        foreach ($sol as $key => $value) {
-            $col = ceil($key / 9);
-            $row = $key % 9 === 0 ? 9 : $key % 9;
-            $cel = (floor(($col - 1) / 3) * 3 )+ ceil($row / 3);
-            
-            unset($grid[$key]);
+        $t = true;
+        while ($t) {
+            $t = false;
+            foreach ($sol as $key => $value) {
+                $col = ceil($key / 9);
+                $row = $key % 9 === 0 ? 9 : $key % 9;
+                $cel = (floor(($col - 1) / 3) * 3 )+ ceil($row / 3);
+                
+                unset($grid[$key]);
 
-            foreach($grid as $k => $c) {
-                if ($c['column'] == $col || $c['row'] == $row || $c['cell'] == $cel ) {
-                    $values = $this->turnOffK($c['values'], $value);
-                    $pos = $this->findPosition($values);
-                    if ($pos === -1) {
-                        $grid[$k]['values'] = $values;
-                    } else {
-                        print $k;
-                        print("\n");
-                        print($pos);
-                        print("\n");
-                        print($values);
-                        print("\n");
-                        $grid[$k]['values'] = $values;
+                foreach($grid as $k => $c) {
+                    if ($c['column'] == $col || $c['row'] == $row || $c['cell'] == $cel ) {
+                        $values = $this->turnOffK($c['values'], $value);
+                        $pos = $this->findPosition($values);
+                        if ($pos === -1) {
+                            $grid[$k]['values'] = $values;
+                        } else {
+                            $t = true;
+                            $sol[$k] = $pos;
+                            unset($grid[$k]);
+                        }
                     }
                 }
-            }
-        } 
-
+            } 
+        }
+        $ksort($sol);
+        print_r($sol);
         //print_r($grid);
 
 
