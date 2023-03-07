@@ -95,6 +95,8 @@ class SudokuSolver extends Command
                     if ($pos === -1) {
                         $grid[$k]['values'] = $values;
                     } else {
+                        print $k;
+                        print("\n");
                         print($pos);
                         print("\n");
                         print($values);
@@ -105,7 +107,7 @@ class SudokuSolver extends Command
             }
         } 
 
-        print_r($grid);
+        //print_r($grid);
 
 
     }
