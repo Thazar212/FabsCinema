@@ -44,15 +44,13 @@ class SudokuSolver extends Command
             56 => 5, 
         ];
         foreach ($sol as $key => $value) {
-            $binValue = decbin($value);
             $col = ceil($key / 9);
             $row = $key % 9 === 0 ? 9 : $key % 9;
             $cel = (floor(($col - 1) / 3) * 3 )+ ceil($row / 3);
-            print ($binValue);
-
+            
             foreach($grid as $k => $c) {
                 if ($c['column'] == $col || $c['row'] == $row || $c['cell'] == $cel ) {
-                    $grid[$k]['values'] = $c['values'] - $binValue;
+                    $grid[$k]['values'] = $turnOffK($c['values'], $value);
                 }
             }
         } 
@@ -62,5 +60,17 @@ class SudokuSolver extends Command
 
     }
 
+    private function function turnOffK($n, $k)
+    {
+         
+        // k must be greater than 0
+        if ($k <= 0)
+            return $n;
+     
+        // Do & of n with a number
+        // with all set bits except
+        // the k'th bit
+        return ($n & ~(1 << ($k - 1)));
+    }
     
 }
