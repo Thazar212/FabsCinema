@@ -168,21 +168,17 @@ class SudokuSolver extends Command
                     $rows[$v['row']][$k]    = $v['values'];
                     $cells[$v['cell']][$k]  = $v['values'];
                     for ($n = 0; $n < strlen($v['values']); $n++) {
-                        if ($this->isKthBitSet($v['values'],$n)) {
+                        if (($v['values'] & (1 << $n))) {
                             $counts['cols'][$v['column']][$n + 1]++;
                             $counts['rows'][$v['row']][$n + 1]++;
                             $counts['cells'][$v['cell']][$n + 1]++;
                         }
                     }
                 }
-                print_r($rows[3]);
-                print("\n");
-                print_r($cols[3]);
+                print_r($rows);
                 
                 print("\n");
                 print_r($counts['rows'][3]);
-                print("\n");
-                print_r($counts['cols'][3]);
                 exit();
 
                 
@@ -264,7 +260,7 @@ class SudokuSolver extends Command
 
     private function isKthBitSet($n, $k)
     {
-            return ($n & (1 << $k));
+            return ($n & (1 << $k))
     }
     
 }
