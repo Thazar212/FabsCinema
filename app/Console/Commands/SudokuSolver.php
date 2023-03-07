@@ -148,12 +148,17 @@ class SudokuSolver extends Command
                     }
                 }
             } 
-            if ($t === true) {
-                echo "continue";
-                continue;
-                echo "badaboom";
-            } else {
-                echo "stop";
+            if ($t !== true) {
+                $cols = [];
+                $rows = [];
+                $cells = [];
+                foreach($grid as $k => $v) {
+                    $cols[$v['column']][$k] = $v['values'];
+                    $rows[$v['row']][$k]    = $v['values'];
+                    $cells[$v['cell']][$k]  = $v['values'];
+                }
+                print_r($cols);
+                exit();
             }
         }
         ksort($sol);
