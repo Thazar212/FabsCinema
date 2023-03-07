@@ -29,10 +29,13 @@ class SudokuSolver extends Command
     {
         $grid = [];
         for ($i = 1; $i <= 81; $i++) {
+            $column = ceil($i / 9);
+            $row = $i % 9 === 0 : 9 ?  $i % 9;
+            $cell = floor($column) + ceil($row);
             $grid[$i] = [
-                'column'    => ceil($i / 9),
-                'row'       => $i % 9,
-                'cell'      => 0,
+                'column'    => $column,
+                'row'       => $row,
+                'cell'      => $cell,
                 'values'    => decbin(511),
             ];
         }
