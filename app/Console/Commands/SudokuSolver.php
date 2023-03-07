@@ -63,6 +63,7 @@ class SudokuSolver extends Command
     private function turnOffK($n, $k)
     {
          
+        $n = bindec($n);
         // k must be greater than 0
         if ($k <= 0)
             return $n;
@@ -70,7 +71,7 @@ class SudokuSolver extends Command
         // Do & of n with a number
         // with all set bits except
         // the k'th bit
-        return ($n & ~(1 << ($k - 1)));
+        return decbin($n & ~(1 << ($k - 1)));
     }
     
 }
