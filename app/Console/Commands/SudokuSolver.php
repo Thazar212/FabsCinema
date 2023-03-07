@@ -31,7 +31,7 @@ class SudokuSolver extends Command
         for ($i = 1; $i <= 81; $i++) {
             $column = ceil($i / 9);
             $row = $i % 9 === 0 ? 9 : $i % 9;
-            $cell = floor($column / 3) + ceil($row / 3);
+            $cell = (floor(($column - 1) / 3) * 3 )+ ceil($row / 3);
             $grid[$i] = [
                 'column'    => $column,
                 'row'       => $row,
