@@ -178,6 +178,7 @@ class SudokuSolver extends Command
                     }
                 }
             }
+            print_r($cols[2]);
             foreach ($counts['cols'] as $column => $columnValue) {
                 foreach ($columnValue as $index => $count) {
                     if ($count === 1) {
