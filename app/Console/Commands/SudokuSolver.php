@@ -29,12 +29,12 @@ class SudokuSolver extends Command
     {
         $grid = [];
         for ($i = 1; $i <= 81; $i++) {
-            $column = ceil($i / 9);
-            $row = $i % 9 === 0 ? 9 : $i % 9;
-            $cell = (floor(($column - 1) / 3) * 3 )+ ceil($row / 3);
+            $row = ceil($i / 9);
+            $column = $i % 9 === 0 ? 9 : $i % 9;
+            $cell = (floor(($row - 1) / 3) * 3 )+ ceil($column / 3);
             $grid[$i] = [
-                'column'    => $column,
                 'row'       => $row,
+                'column'    => $column,
                 'cell'      => $cell,
                 'values'    => decbin(511),
             ];
@@ -128,9 +128,9 @@ class SudokuSolver extends Command
         while ($t) {
             $t = false;
             foreach ($sol as $key => $value) {
-                $col = ceil($key / 9);
-                $row = $key % 9 === 0 ? 9 : $key % 9;
-                $cel = (floor(($col - 1) / 3) * 3 )+ ceil($row / 3);
+                $row = ceil($key / 9);
+                $col = $key % 9 === 0 ? 9 : $key % 9;
+                $cel = (floor(($row - 1) / 3) * 3 )+ ceil($col / 3);
                 
                 unset($grid[$key]);
 
