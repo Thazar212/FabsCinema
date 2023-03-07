@@ -87,10 +87,20 @@ class SudokuSolver extends Command
             $cel = (floor(($col - 1) / 3) * 3 )+ ceil($row / 3);
             
             unset($grid[$key]);
-            
+
             foreach($grid as $k => $c) {
                 if ($c['column'] == $col || $c['row'] == $row || $c['cell'] == $cel ) {
-                    $grid[$k]['values'] = $this->turnOffK($c['values'], $value);
+                    $values = $this->turnOffK($c['values'], $value);
+                    $pos = findPosition($values);
+                    if ($pos === -1) {
+                        $grid[$k]['values'] = $values;
+                    } else {
+                        print($pos);
+                        print("\n");
+                        print($values);
+                        print("\n");
+                        $grid[$k]['values'] = $values;
+                    }
                 }
             }
         } 
@@ -100,7 +110,7 @@ class SudokuSolver extends Command
 
     }
 
-    private function turnOffK($n, $k)
+    private function turnOffK ($n, $k)
     {
          
         $n = bindec($n);
@@ -113,5 +123,48 @@ class SudokuSolver extends Command
         // the k'th bit
         return decbin($n & ~(1 << ($k - 1)));
     }
+
+    private function getBitCount ($value)
+    {
+        $count = 0;
+        while($value)
+        {
+            $count += ($value & 1);
+            $value = $value >> 1;
+        }
+        return $count;
+    }
+
+    private function findPosition ($b)
+    {
+        $n = bindec($b)
+        if (!$this->isPowerOfTwo($n))
+            return -1;
     
+        $i = 1;
+        $pos = 1;
+    
+        // Iterate through bits of n
+        // till we find a set bit i&n
+        // will be non-zero only when
+        // 'i' and 'n' have a set bit
+        // at same position
+        while (!($i & $n))
+        {
+            // Unset current bit and
+            // set the next bit in 'i'
+            $i = $i << 1;
+    
+            // increment position
+            ++$pos;
+        }
+    
+        return $pos;
+    }
+
+    private function isPowerOfTwo($n)
+    {
+        return $n && (!($n & ($n - 1)));
+        
+    }
 }
