@@ -108,7 +108,7 @@ class SudokuSolver extends Command
         }
         ksort($sol);
         print_r($sol);
-        //print_r($grid);
+        print_r($grid);
 
 
     }
