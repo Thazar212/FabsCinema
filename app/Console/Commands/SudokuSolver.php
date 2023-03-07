@@ -264,7 +264,7 @@ class SudokuSolver extends Command
 
     private function isKthBitSet($n, $k)
     {
-            return ($n & (1 << $k))
+            return ($n & (1 << $k));
     }
     
 }
