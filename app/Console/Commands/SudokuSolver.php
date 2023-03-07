@@ -60,7 +60,7 @@ class SudokuSolver extends Command
 
     }
 
-    private function function turnOffK($n, $k)
+    private function turnOffK($n, $k)
     {
          
         // k must be greater than 0
