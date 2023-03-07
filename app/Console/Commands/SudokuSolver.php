@@ -165,28 +165,28 @@ class SudokuSolver extends Command
                     $counts['cells'][$i][$j] = 0;
                 }
             }
-
             foreach($grid as $k => $v) {
                 $cols[$v['column']][$k] = $v['values'];
                 $rows[$v['row']][$k]    = $v['values'];
                 $cells[$v['cell']][$k]  = $v['values'];
                 for ($n = 0; $n < strlen($v['values']); $n++) {
-                    $p = $n + 1;
                     if (($v['values'] & (1 << $n))) {
-                        $counts['cols'][$v['column']][$p] = $counts['cols'][$v['column']][$p] + 1;
-                        $counts['rows'][$v['row']][$p] = $counts['rows'][$v['row']][$p] + 1;
-                        $counts['cells'][$v['cell']][$p] = $counts['cells'][$v['cell']][$p] + 1;
+                        $counts['cols'][$v['column']][$n + 1]++;
+                        $counts['rows'][$v['row']][$n + 1]++;
+                        $counts['cells'][$v['cell']][$n + 1]++;
                     }
                 }
             }
             print_r($rows[3]);
+            foreach ($rows[3] as $r) {
+                print($this->getBitCount($r));
+                print("\n");
+            }
             
             print("\n");
             print_r($counts['rows'][3]);
             exit();
 
-                
-           
         }
         ksort($sol);
         print_r($sol);
@@ -209,6 +209,16 @@ class SudokuSolver extends Command
         return decbin($n & ~(1 << ($k - 1)));
     }
 
+    private function getBitCount ($value)
+    {
+        $count = 0;
+        while($value)
+        {
+            $count += ($value & 1);
+            $value = $value >> 1;
+        }
+        return $count;
+    }
 
     private function findPosition ($b)
     {
@@ -241,6 +251,15 @@ class SudokuSolver extends Command
     {
         return $n && (!($n & ($n - 1)));
         
+    }
+
+    private function bitAtGivenPosSetOrUnset($n, $k)
+    {
+        $new_num = $n >> ($k - 1);
+        
+        // if it results to '1' then bit is set,
+        // else it results to '0' bit is unset
+        return ($new_num & 1);
     }
     
 }
