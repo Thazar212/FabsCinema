@@ -167,7 +167,7 @@ class SudokuSolver extends Command
                     $cols[$v['column']][$k] = $v['values'];
                     $rows[$v['row']][$k]    = $v['values'];
                     $cells[$v['cell']][$k]  = $v['values'];
-                    for ($n = 0; $n < 9; $n++) {
+                    for ($n = 0; $n < strlen($v['values']); $n++) {
                         if ($v['values'] & (1 << $n)) {
                             $counts['cols'][$v['column']][$n + 1]++;
                             $counts['rows'][$v['row']][$n + 1]++;
@@ -260,6 +260,23 @@ class SudokuSolver extends Command
         // if it results to '1' then bit is set,
         // else it results to '0' bit is unset
         return ($new_num & 1);
+    }
+
+    private function setBitNumber($n)
+    {
+        if ($n == 0)
+            return 0;
+     
+        $msb = 0;
+            $n = $n / 2;
+     
+        while ($n != 0)
+        {
+            $n = $n / 2;
+            $msb++;
+        }
+     
+        return (1 << $msb);
     }
  
 }
