@@ -180,7 +180,7 @@ class SudokuSolver extends Command
             }
             foreach ($counts['cols'] as $column => $columnValue) {
                 foreach ($columnValue as $index => $count) {
-                    //print ("Column: {$column}, Index: {$index}, Count: {$count}\n" );
+                    print ("Column: {$column}, Index: {$index}, Count: {$count}\n" );
                     if ($count === 1) {
                         foreach ($cols[$column] as $cellNum => $cellValue) {
 
