@@ -181,11 +181,14 @@ class SudokuSolver extends Command
             foreach ($counts['cols'] as $column => $columnValue) {
                 foreach ($columnValue as $index => $count) {
                     if ($count === 1) {
+                        print ("Column: {$column}, Index: {$index}, Count: {$count}\n" );
                         foreach ($cols[$column] as $cellNum => $cellValue) {
                             if ($this->isKthBitSet($cellValue, $index - 1)) {
+                                print("{$cellNum} => {$index}");
                                 $t = true;
                                 $sol[$cellNum] = $index;
                                 unset($grid[$cellNum]);
+                                break;
                             }
                         }
                     }
