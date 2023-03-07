@@ -179,7 +179,7 @@ class SudokuSolver extends Command
             }
             print_r($rows[3]);
             foreach ($rows[3] as $r) {
-                print($this->getBitCount($r));
+                print(strlen($r));
                 print("\n");
             }
             
