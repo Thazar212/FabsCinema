@@ -257,10 +257,5 @@ class SudokuSolver extends Command
         // else it results to '0' bit is unset
         return ($new_num & 1);
     }
-
-    private function isKthBitSet($n, $k)
-    {
-            return ($n & (1 << $k))
-    }
     
 }
