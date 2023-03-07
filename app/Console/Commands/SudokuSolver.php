@@ -157,7 +157,7 @@ class SudokuSolver extends Command
                     $rows[$v['row']][$k]    = $v['values'];
                     $cells[$v['cell']][$k]  = $v['values'];
                 }
-                print_r($cols);
+                print_r($rows);
                 exit();
             }
         }
