@@ -50,7 +50,7 @@ class SudokuSolver extends Command
             
             foreach($grid as $k => $c) {
                 if ($c['column'] == $col || $c['row'] == $row || $c['cell'] == $cel ) {
-                    $grid[$k]['values'] = $turnOffK($c['values'], $value);
+                    $grid[$k]['values'] = turnOffK($c['values'], $value);
                 }
             }
         } 
