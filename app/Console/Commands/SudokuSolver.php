@@ -137,7 +137,7 @@ class SudokuSolver extends Command
 
     private function findPosition ($b)
     {
-        $n = bindec($b)
+        $n = bindec($b);
         if (!$this->isPowerOfTwo($n))
             return -1;
     
