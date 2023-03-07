@@ -173,9 +173,9 @@ class SudokuSolver extends Command
                 for ($n = 0; $n < strlen($v['values']); $n++) {
                     $p = $n + 1;
                     if (($v['values'] & (1 << $n))) {
-                        $counts['cols'][$v['column']][$p]++;
-                        $counts['rows'][$v['row']][$p]++;
-                        $counts['cells'][$v['cell']][$p]++;
+                        $counts['cols'][$v['column']][$p] = $counts['cols'][$v['column']][$p] + 1;
+                        $counts['rows'][$v['row']][$p] = $counts['rows'][$v['row']][$p] + 1;
+                        $counts['cells'][$v['cell']][$p] = $counts['cells'][$v['cell']][$p] + 1;
                     }
                 }
             }
