@@ -126,7 +126,7 @@ class SudokuSolver extends Command
        
         $sol = $sol6;
 
-
+        $level = "Easy";
         $t = true;
         while ($t) {
             $t = false;
@@ -154,6 +154,7 @@ class SudokuSolver extends Command
             if ($t === true) {
                 continue;
             }
+            $level = "medium";
             $cols = [];
             $rows = [];
             $cells = [];
@@ -177,16 +178,27 @@ class SudokuSolver extends Command
                     }
                 }
             }
-            print_r($rows[3]);
-            
-            print("\n");
-            print_r($counts['rows'][3]);
-            exit();
+            foreach ($counts['cols'] as $column => $columnValue) {
+                foreach ($columnValue as $index => $count) {
+                    if ($count === 1) {
+                        foreach ($cols[$column] as $cellNum => $cellValue) {
+                            if ($this->isKthBitSet($cellValue, $index)) {
+                                $sol[$cellNum] = $index;
+                                unset($grid[$cellNum]);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
 
         }
         ksort($sol);
         print_r($sol);
         print_r($grid);
+        print("\n");
+        print $level;
 
 
     }
