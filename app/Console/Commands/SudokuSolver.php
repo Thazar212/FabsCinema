@@ -186,7 +186,6 @@ class SudokuSolver extends Command
                                 $t = true;
                                 $sol[$cellNum] = $index;
                                 unset($grid[$cellNum]);
-                                break;
                             }
                         }
                     }
