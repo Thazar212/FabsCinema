@@ -166,7 +166,7 @@ class SudokuSolver extends Command
                     $counts['cells'][$i][$j] = 0;
                 }
             }
-             foreach($grid as $k => $v) {
+            foreach($grid as $k => $v) {
                 $cols[$v['column']][$k] = $v['values'];
                 $rows[$v['row']][$k]    = $v['values'];
                 $cells[$v['cell']][$k]  = $v['values'];
@@ -178,13 +178,11 @@ class SudokuSolver extends Command
                     }
                 }
             }
-            print_r($cols[2]);
             foreach ($counts['cols'] as $column => $columnValue) {
                 foreach ($columnValue as $index => $count) {
                     if ($count === 1) {
-                        print ("Column: {$column}, Index: {$index}, Count: {$count}\n" );
                         foreach ($cols[$column] as $cellNum => $cellValue) {
-                            if ($this->isKthBitSet($cellValue, $index)) {
+                            if ($this->isKthBitSet($cellValue, $index - 1)) {
                                 $t = true;
                                 $sol[$cellNum] = $index;
                                 unset($grid[$cellNum]);
