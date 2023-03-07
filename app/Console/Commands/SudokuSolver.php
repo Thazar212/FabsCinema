@@ -123,7 +123,10 @@ class SudokuSolver extends Command
             66 => 9, 67 => 6, 69 => 2,
             75 => 8, 79 => 1, 81 => 9,
         ];
+       
         $sol = $sol6;
+
+
         $t = true;
         while ($t) {
             $t = false;
@@ -152,13 +155,32 @@ class SudokuSolver extends Command
                 $cols = [];
                 $rows = [];
                 $cells = [];
+                $counts = [];
+                for ($i = 1; $i <= 9; $i++) {
+                    for ($j = 1; $j <= 9; $j++) {
+                        $counts['cols'][$i][$j]  = 0;
+                        $counts['rows'][$i][$j]  = 0;
+                        $counts['cells'][$i][$j] = 0;
+                    }
+                }
                 foreach($grid as $k => $v) {
                     $cols[$v['column']][$k] = $v['values'];
                     $rows[$v['row']][$k]    = $v['values'];
                     $cells[$v['cell']][$k]  = $v['values'];
+                    for ($n = 0; $n < 9; $n++) {
+                        if ($v['values'] & (1 << $n)) {
+                            $counts['cols'][$v['column']][$n + 1]++;
+                            $counts['rows'][$v['row']][$n + 1]++;
+                            $counts['cells'][$v['cell']][$n + 1]++;
+                        }
+                    }
                 }
-                print_r($rows);
-                exit();
+                print_r($rows[3]);
+                print("\n");
+                print_r($counts['rows'][3]);
+                
+
+                
             }
         }
         ksort($sol);
@@ -225,4 +247,14 @@ class SudokuSolver extends Command
         return $n && (!($n & ($n - 1)));
         
     }
+
+    private function bitAtGivenPosSetOrUnset($n, $k)
+    {
+        $new_num = $n >> ($k - 1);
+        
+        // if it results to '1' then bit is set,
+        // else it results to '0' bit is unset
+        return ($new_num & 1);
+    }
+ 
 }
