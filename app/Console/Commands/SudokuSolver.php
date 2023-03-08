@@ -335,6 +335,14 @@ class SudokuSolver extends Command
             if ($level < 4) {
                 $level = 4;
             }
+            $cols = [];
+            $rows = [];
+            $cells = [];
+            foreach($grid as $k => $v) {
+                $cols[$v['column']][$k] = $v['values'];
+                $rows[$v['row']][$k]    = $v['values'];
+                $cells[$v['cell']][$k]  = $v['values'];
+            }
             foreach ($rows as $rowIndex => $row) {
                 $nbCells = count($row);
                 if ($rowIndex === 7) {
