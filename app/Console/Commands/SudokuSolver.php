@@ -402,6 +402,7 @@ class SudokuSolver extends Command
                     }
             }
             foreach ($cols as $columnIndex => $column) {
+                print("column: {$columnIndex}\n");
                 $commun = [];
                 foreach ($column as $cellIndex => $cellValue) {
                     foreach ($column as $cellIndex2 => $cellValue2) {
@@ -462,7 +463,7 @@ class SudokuSolver extends Command
                     }
                     
                 }
-                print("column: {$columnIndex}\n");
+                
                 print("column values:");
                 print_r($column);
         }
