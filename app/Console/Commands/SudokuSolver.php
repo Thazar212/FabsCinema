@@ -383,6 +383,7 @@ class SudokuSolver extends Command
                         }    
                     }
                     print("Row: {$rowIndex}\n");
+                    print_r($commun);
                     foreach ($commun as $communIndex => $communValue) {
                         if (strlen($communIndex) === $communValue) {
                             $indexes = str_split($communIndex);
