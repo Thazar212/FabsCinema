@@ -283,8 +283,6 @@ class SudokuSolver extends Command
                             $cellValueColumns[$n+1][] = $column;
                         }
                     }
-                    
-
     
                 }
                 for ($n = 1; $n <= 9; $n++) { 
@@ -297,7 +295,6 @@ class SudokuSolver extends Command
                 }
                 foreach ($cellValueRows as $value => $row) {
                     if (count($row) === 1) {
-                        print "remove value {$value}  from row {$row[0]} \n"; 
                         foreach($grid as $k => $c) {
                             if ($c['cell'] != $cellIndex && $c['row'] == $row[0]) {
                                 $values = $this->turnOffK($c['values'], $value);
@@ -315,7 +312,6 @@ class SudokuSolver extends Command
                 }
                 foreach ($cellValueColumns as $value => $column) {
                     if (count($column) === 1) {
-                        print "remove value {$value}  from column {$column[0]} \n"; 
                         foreach($grid as $k => $c) {
                             if ($c['cell'] != $cellIndex && $c['column'] == $column[0]) {
                                 $values = $this->turnOffK($c['values'], $value);
@@ -333,8 +329,20 @@ class SudokuSolver extends Command
                 }
                 
             }
+            if ($t === true) {
+                continue;
+            }
+            if ($level < 4) {
+                $level = 4;
+            }
+            foreach ($rows as $rowIndex => $row) {
+                if ($rowIndex === 3) {
+                    print_r($row);
+                }
+            }
 
         }
+        exit();
         ksort($sol);
         print_r($sol);
         print_r($grid);
