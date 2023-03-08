@@ -353,12 +353,15 @@ class SudokuSolver extends Command
                                 }
                             }
                             
-                            if ($communIndex ) {
+                            if ($communIndex) {
                                 foreach ($commun as $ci => $cnb) {
                                     print("{$communIndex} => {$ci} \n");
-                                    if ($communIndex != $ci && strpos($communIndex, $ci) !== false) {
+                                    if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
                                         echo "skip\n";
                                         continue(2);
+                                    }
+                                    else {
+
                                     }
                                 }
                                 if (!isset($commun[$communIndex])) {
