@@ -377,7 +377,8 @@ class SudokuSolver extends Command
                         }    
                                          
                     }
-                    print("{$rowIndex}\n");
+                    print("Row index: {$rowIndex}\n");
+                    print("commun: ");
                     print_r($commun);
                     print("\n");
                     foreach ($commun as $communIndex => $communValue) {
@@ -404,6 +405,7 @@ class SudokuSolver extends Command
                         
                     }
                     print("\n");
+                    print("Row values: ");
                     print_r($row);
 
             }
