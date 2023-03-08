@@ -420,7 +420,7 @@ class SudokuSolver extends Command
                                 $ciSplits =str_split($communIndex);
                                 foreach ($ciSplits as $ciSplit) {
                                     if (strval($communIndex) != strval($ci) && strpos(strval($ci), strval($ciSplit)) !== false) {  
-                                        if (strlen($communIndex) >= strlen($ci)) {
+                                        if (strlen($communIndex) < strlen($ci)) {
                                             continue(3);
                                         } else {
                                             unset($commun[$ci]);
