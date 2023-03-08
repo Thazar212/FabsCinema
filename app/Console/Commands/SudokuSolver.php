@@ -436,12 +436,14 @@ class SudokuSolver extends Command
                     if (strlen($communIndex) === $communValue) {
                         $indexes = str_split($communIndex);
                         $allTrue = true;
+                        
                         foreach ($column as $cellIndex => $cellValue) {
                             foreach($indexes as $index) {
                                 if (!$this->isKthBitSet($cellValue, $index -1)) {
                                     $allTrue = false;
                                 }
                             }
+                            print ("Cell index: {$cellIndex}, Commun Index: {$communIndex}, All true:{ $allTrue} \n");
                             for ($n = 0; $n < strlen($cellValue); $n++) {
                                 if ($this->isKthBitSet($cellValue, $n)) {
                                     if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
@@ -454,6 +456,9 @@ class SudokuSolver extends Command
                     }
                     
                 }
+                print("column: {$columnIndex}\n");
+                print("column values:")
+                print_r($column);
         }
 
         }
