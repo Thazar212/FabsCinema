@@ -277,7 +277,7 @@ class SudokuSolver extends Command
                 foreach ($cellNums as $cellNum => $cellValue) {
                     $row = $grid[$cellNum]['row'];
                     $column = $grid[$cellNum]['column'];
-                    for ($n = 0; $n < strlen(); $n++) {
+                    for ($n = 0; $n < strlen($cellValue); $n++) {
                         if ($this->isKthBitSet($cellValue, $n)) {
                             $cellValueRows[$n+1][] = $row;
                             $cellValueColumns[$n+1][] = $column;
