@@ -349,6 +349,8 @@ class SudokuSolver extends Command
                             for ($n = 0; $n < strlen($cellValue); $n++) {
                                 if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
                                     $communIndex .= strval($n + 1);
+                                    echo $n+1 ;
+                                    echo "\n";
                                 }
                             }
                             if (!isset($commun[$communIndex])) {
