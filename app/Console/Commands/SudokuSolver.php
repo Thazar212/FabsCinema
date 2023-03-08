@@ -364,8 +364,10 @@ class SudokuSolver extends Command
                                     $ciSplits = str_split($ci);
                                     foreach ($commSplits as $commSplit) {
                                         if (strval($communIndex) != strval($ci) && strpos(strval($commSplit), strval($ci)) !== false) {
-                                            unset($commun[$ci]);
-                                            continue(3);
+                                            if (strlen($ci) > strlen($communIndex)) {
+                                                unset($commun[$ci]);
+                                                continue(3);
+                                            }
                                         }
                                     }
                                 }
@@ -423,8 +425,10 @@ class SudokuSolver extends Command
                                 $ciSplits = str_split($ci);
                                 foreach ($commSplits as $commSplit) {
                                     if (strval($communIndex) != strval($ci) && strpos(strval($commSplit), strval($ci)) !== false) {
-                                        unset($commun[$ci]);
-                                        continue(3);
+                                        if (strlen($ci) > strlen($communIndex)) {
+                                            unset($commun[$ci]);
+                                            continue(3);
+                                        }
                                     }
                                 }
                             }
