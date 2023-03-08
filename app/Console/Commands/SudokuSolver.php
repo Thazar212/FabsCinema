@@ -424,7 +424,7 @@ class SudokuSolver extends Command
                                     }
                                 }
                                 foreach ($ciSplits as $ciSplit) {
-                                    if (strval($communIndex) != strval($ci) && strpos(strval($ciSplits), strval($communIndex)) !== false) {
+                                    if (strval($communIndex) != strval($ci) && strpos(strval($ciSplit), strval($communIndex)) !== false) {
                                         unset($commun[$ci]);
                                     }
                                 }
