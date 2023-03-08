@@ -391,7 +391,7 @@ class SudokuSolver extends Command
                                         }
                                     }
                                 }
-
+                            }
                         }
                     }
                     print("\n");
