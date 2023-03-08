@@ -344,8 +344,6 @@ class SudokuSolver extends Command
                 $cells[$v['cell']][$k]  = $v['values'];
             }
             foreach ($rows as $rowIndex => $row) {
-                $nbCells = count($row);
-                
                     $commun = [];
                     foreach ($row as $cellIndex => $cellValue) {
                         foreach ($row as $cellIndex2 => $cellValue2) {
@@ -364,6 +362,9 @@ class SudokuSolver extends Command
                             if ($communIndex) {
                                 foreach ($commun as $ci => $cnb) {
                                     if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
+                                        continue(2);
+                                    }
+                                    if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
                                         continue(2);
                                     }
                                 }
@@ -403,7 +404,6 @@ class SudokuSolver extends Command
                         
                     }
                     print("\n");
-                    print("{$nbCells} \n");
                     print_r($row);
 
             }
