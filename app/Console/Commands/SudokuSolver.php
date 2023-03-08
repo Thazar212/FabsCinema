@@ -366,9 +366,6 @@ class SudokuSolver extends Command
                                     if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
                                         continue(2);
                                     }
-                                    else {
-
-                                    }
                                 }
                                 if (!isset($commun[$communIndex])) {
                                     $commun[$communIndex] = 2;
@@ -379,6 +376,9 @@ class SudokuSolver extends Command
                         }    
                                          
                     }
+                    print("{$rowIndex}\n");
+                    print_r($commun);
+                    print("\n");
                     foreach ($commun as $communIndex => $communValue) {
                         if (strlen($communIndex) === $communValue) {
                             $indexes = str_split($communIndex);
