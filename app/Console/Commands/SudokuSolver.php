@@ -399,7 +399,7 @@ class SudokuSolver extends Command
                         
                     }
             }
-            foreach ($columns as $columnIndex => $column) {
+            foreach ($cols as $columnIndex => $column) {
                 $commun = [];
                 foreach ($column as $cellIndex => $cellValue) {
                     foreach ($column as $cellIndex2 => $cellValue2) {
