@@ -384,8 +384,6 @@ class SudokuSolver extends Command
                         }
                     }
 
-                    print("Row: {$rowIndex}\n");
-                    print_r($commun);
                     foreach ($commun as $communIndex => $communValue) {
                         if (strlen($communIndex) === $communValue) {
                             $indexes = str_split($communIndex);
@@ -428,29 +426,30 @@ class SudokuSolver extends Command
                         }
 
                         if ($communIndex) {
-                            foreach ($commun as $ci => $cnb) {
-                                if (strval($communIndex) === strval($ci)) {
-                                    continue;
-                                }
-                                $splitCis = str_split($ci);
-                                foreach ($splitCis as $splitCi) {
-                                    if (strpos(strval($communIndex),strval($splitCi)) !== false) {
-                                        unset($commun[$ci]);
-                                    }
-                                }
-                                if (strpos(strval($communIndex), strval($ci)) !== false) {
-                                    continue(2);
-                                }
-                                
-                            }
                             if (!isset($commun[$communIndex])) {
                                 $commun[$communIndex] = 2;
                             } else {
                                 $commun[$communIndex]++;
                             }
                         }
-                    }    
-                                     
+                    }                  
+                }
+
+                foreach($commun as $communIndex => $communValue) {
+                    foreach ($commun as $communIndex2 => $communValue2) {
+                        $strCi = strval($communIndex);
+                        $strCi2 = strval($communIndex2);
+                        if ($strCi === $strCi2) {
+                            continue;
+                        }
+
+                        for ($i = 0; $i < strlen($strCi2); $i++) {
+                            if (strpos($strCi,$strCi2[$i]) !== FALSE) {
+                                $commun[$communIndex] = 99;
+                                $commun[$communIndex2] = 99;
+                            }
+                        }
+                    }
                 }
                 print ("Commun:");
                 print_r($commun);
