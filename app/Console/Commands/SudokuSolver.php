@@ -359,21 +359,6 @@ class SudokuSolver extends Command
                             }
                             
                             if ($communIndex) {
-                                foreach ($commun as $ci => $cnb) {
-                                    if (strval($communIndex) === strval($ci)) {
-                                        continue;
-                                    }
-                                    $splitCis = str_split($ci);
-                                    foreach ($splitCis as $splitCi) {
-                                        if (strpos(strval($communIndex),strval($splitCi)) !== false) {
-                                            unset($commun[$ci]);
-                                        }
-                                    }
-                                    if (strpos(strval($communIndex), strval($ci)) !== false) {
-                                        continue(2);
-                                    }
-                                    
-                                }
                                 if (!isset($commun[$communIndex])) {
                                     $commun[$communIndex] = 2;
                                 } else {
@@ -382,6 +367,20 @@ class SudokuSolver extends Command
                             }
                         }    
                     }
+                    foreach($commun as $communIndex => $communValue) {
+                        foreach ($commun as $communIndex2 => $communValue2) {
+                            if ($communIndex === $communIndex2) {
+                                continue();
+                            }
+                            for ($i=0;$i<strlen($communIndex2);$i++) {
+                                if (stripos($communIndex,$communIndex2[$i])!==FALSE) {
+                                    $commun[$communIndex] = 99;
+                                    $commun[$communIndex2] = 99;
+                                }
+                            }
+                        }
+                    }
+
                     print("Row: {$rowIndex}\n");
                     print_r($commun);
                     foreach ($commun as $communIndex => $communValue) {
