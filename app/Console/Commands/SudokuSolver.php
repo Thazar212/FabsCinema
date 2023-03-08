@@ -416,14 +416,18 @@ class SudokuSolver extends Command
 
                             }
                         }
-                        
+                        print("{$communIndex}\n")
 
                         if ($communIndex) {
                             foreach ($commun as $ci => $cnb) {
-                                if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
+                                if (strval($communIndex) === strval($ci) strlen($communIndex) === 1) {
+                                    continue;
+                                }
+                                
+                                if (strpos(strval($communIndex), strval($ci)) !== false) {
                                     continue(2);
                                 }
-                                if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
+                                if (strpos(strval($ci),strval($communIndex)) !== false) {
                                     unset($commun[$ci]);
                                 }
                                
