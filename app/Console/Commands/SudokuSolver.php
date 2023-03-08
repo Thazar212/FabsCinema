@@ -369,12 +369,14 @@ class SudokuSolver extends Command
                     }
                     foreach($commun as $communIndex => $communValue) {
                         foreach ($commun as $communIndex2 => $communValue2) {
+                            print("{$communIndex} <==> {$communIndex}\n");
+                            if ($communIndex === $communIndex2) {
+                                continue;
+                            }
                             for ($i=0;$i<strlen($communIndex2);$i++) {
                                 if (stripos($communIndex,$communIndex2[$i])!==FALSE) {
-                                    if ($communIndex !== $communIndex2) {
-                                        $commun[$communIndex] = 99;
-                                        $commun[$communIndex2] = 99;
-                                    }
+                                    $commun[$communIndex] = 99;
+                                    $commun[$communIndex2] = 99;
                                 }
                             }
                         }
