@@ -416,7 +416,7 @@ class SudokuSolver extends Command
 
                             }
                         }
-                        print("{$communIndex}\n")
+                        print("{$communIndex}\n");
 
                         if ($communIndex) {
                             foreach ($commun as $ci => $cnb) {
