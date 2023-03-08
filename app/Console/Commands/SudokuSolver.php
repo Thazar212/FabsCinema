@@ -344,6 +344,7 @@ class SudokuSolver extends Command
                             if ($cellIndex >= $cellIndex2) {
                                 continue;
                             }
+                            print("{$cellIndex} => {$cellVallue} :: {$cellIndex2} => {$cellVallue2}\n");
                             $communIndex = "";
                             for ($n = 0; $n < strlen($cellValue); $n++) {
                                 if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
