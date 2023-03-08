@@ -400,6 +400,8 @@ class SudokuSolver extends Command
                     }
             }
             foreach ($cols as $columnIndex => $column) {
+                print_r($cols);
+                exit();
                 print("column: {$columnIndex}\n");
                 $commun = [];
                 foreach ($column as $cellIndex => $cellValue) {
