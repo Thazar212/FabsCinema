@@ -382,7 +382,7 @@ class SudokuSolver extends Command
                                             $allTrue = false;
                                         }
                                     }
-                                    print ("{$cellIndex} : {$alltrue}")
+                                    print ("{$cellIndex} : {$alltrue}\n");
                                     for ($n = 0; $n < strlen($cellValue); $n++) {
                                         if ($this->isKthBitSet($cellValue, $n)) {
                                             if (($n === $index -1 && !$allTrue) || ($n !== $index -1 && $allTrue)) {
