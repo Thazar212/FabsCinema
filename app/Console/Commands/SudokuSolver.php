@@ -401,8 +401,7 @@ class SudokuSolver extends Command
             }
             ksort($cols);
             foreach ($cols as $columnIndex => $column) {
-                print_r($cols);
-                exit();
+
                 print("column: {$columnIndex}\n");
                 $commun = [];
                 foreach ($column as $cellIndex => $cellValue) {
@@ -418,17 +417,16 @@ class SudokuSolver extends Command
                             }
                         }
                         
+                        if ($rowIndex === 8) {
+                            print ("{$communIndex} \n ")
+                        }
                         if ($communIndex) {
                             foreach ($commun as $ci => $cnb) {
-                                $ciSplits =str_split($communIndex);
-                                foreach ($ciSplits as $ciSplit) {
-                                    if (strval($communIndex) != strval($ci) && strpos(strval($ci), strval($ciSplit)) !== false) {  
-                                        if (strlen($communIndex) >= strlen($ci)) {
-                                            continue(3);
-                                        } else {
-                                            unset($commun[$ci]);
-                                        } 
-                                    }                   
+                                if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
+                                    continue(2);
+                                }
+                                if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
+                                    unset($commun[$ci]);
                                 }
                                
                             }
