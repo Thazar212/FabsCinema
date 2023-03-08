@@ -360,17 +360,11 @@ class SudokuSolver extends Command
                             
                             if ($communIndex) {
                                 foreach ($commun as $ci => $cnb) {
-                                    if (strval($communIndex) === strval($ci)) {
-                                        continue;
-                                    }
-                                    $splitCis = str_split($communIndex);
-                                    foreach ($splitCis as $splitCi) {
-                                        if (strpos(strval($ci),strval($splitCi)) !== false) {
-                                            unset($commun[$ci]);
-                                        }
-                                    }
-                                    if (strpos(strval($communIndex), strval($ci)) !== false) {
+                                    if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
                                         continue(2);
+                                    }
+                                    if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
+                                        unset($commun[$ci]);
                                     }
                                 }
                                 if (!isset($commun[$communIndex])) {
@@ -407,6 +401,7 @@ class SudokuSolver extends Command
             }
             ksort($cols);
             foreach ($cols as $columnIndex => $column) {
+                if ($columnIndex === 8) {
                 print("column: {$columnIndex}\n");
                 $commun = [];
                 foreach ($column as $cellIndex => $cellValue) {
@@ -421,15 +416,16 @@ class SudokuSolver extends Command
 
                             }
                         }
-                        
+                        print("{$communIndex}\n");
+
                         if ($communIndex) {
                             foreach ($commun as $ci => $cnb) {
                                 if (strval($communIndex) === strval($ci)) {
                                     continue;
                                 }
-                                $splitCis = str_split($communIndex);
+                                $splitCis = str_split($ci);
                                 foreach ($splitCis as $splitCi) {
-                                    if (strpos(strval($ci),strval($splitCi)) !== false) {
+                                    if (strpos(strval($communIndex),strval($splitCi)) !== false) {
                                         unset($commun[$ci]);
                                     }
                                 }
@@ -447,7 +443,8 @@ class SudokuSolver extends Command
                     }    
                                      
                 }
-
+                print ("Commun:");
+                print_r($commun);
                 foreach ($commun as $communIndex => $communValue) {
                     if (strlen($communIndex) === $communValue) {
                         $indexes = str_split($communIndex);
@@ -458,7 +455,7 @@ class SudokuSolver extends Command
                                     $allTrue = false;
                                 }
                             }
-                            //print ("Cell index: {$cellIndex}, Commun Index: {$communIndex}, All true:{ $allTrue} \n");
+                            print ("Cell index: {$cellIndex}, Commun Index: {$communIndex}, All true:{ $allTrue} \n");
                             for ($n = 0; $n < strlen($cellValue); $n++) {
                                 if ($this->isKthBitSet($cellValue, $n)) {
                                     if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
@@ -474,6 +471,7 @@ class SudokuSolver extends Command
 
                 print("column values:");
                 print_r($column);
+            }   
         }
 
         }
