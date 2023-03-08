@@ -286,11 +286,14 @@ class SudokuSolver extends Command
                     
                     if ($cellIndex == 7) {
                         print("CellNum: {$cellNum} => {$cellValue} \n");
-                        print_r($cellValueRows);
-                        print("\n");
-                        print_r($cellValueColumns);
                     }
     
+                }
+                if ($cellIndex == 7) {
+                    print_r($cellValueRows);
+                    print("\n");
+                    print_r($cellValueColumns);
+
                 }
             }
 
