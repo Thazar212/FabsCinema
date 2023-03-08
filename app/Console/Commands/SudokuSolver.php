@@ -288,7 +288,7 @@ class SudokuSolver extends Command
                         print("CellNum: {$cellNum} => {$cellValue} \n");
                         print_r($cellValueRows);
                         print("\n");
-                        print_r($$cellValueColumns);
+                        print_r($cellValueColumns);
                     }
     
                 }
