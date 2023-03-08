@@ -360,11 +360,13 @@ class SudokuSolver extends Command
                             
                             if ($communIndex) {
                                 foreach ($commun as $ci => $cnb) {
-                                    if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
-                                        continue(2);
-                                    }
-                                    if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
-                                        unset($commun[$ci]);
+                                    $commSplits = str_split($communIndex);
+                                    $ciSplits = str_split($ci);
+                                    foreach ($commSplits as $commSplit) {
+                                        if (strval($communIndex) != strval($ci) && strpos(strval($commSplit), strval($ci)) !== false) {
+                                            unset($commun[$ci]);
+                                            continue(3);
+                                        }
                                     }
                                 }
                                 if (!isset($commun[$communIndex])) {
@@ -420,12 +422,8 @@ class SudokuSolver extends Command
                                 $ciSplits = str_split($ci);
                                 foreach ($commSplits as $commSplit) {
                                     if (strval($communIndex) != strval($ci) && strpos(strval($commSplit), strval($ci)) !== false) {
-                                        continue(3);
-                                    }
-                                }
-                                foreach ($ciSplits as $ciSplit) {
-                                    if (strval($communIndex) != strval($ci) && strpos(strval($ciSplit), strval($communIndex)) !== false) {
                                         unset($commun[$ci]);
+                                        continue(3);
                                     }
                                 }
                             }
