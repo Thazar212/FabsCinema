@@ -344,10 +344,10 @@ class SudokuSolver extends Command
                             if ($cellIndex >= $cellIndex2) {
                                 continue;
                             }
-                            $communIndex ="";
+                            $communIndex = "";
                             for ($n = 0; $n < strlen($cellValue); $n++) {
                                 if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
-                                    $communIndex .= ($n + 1);
+                                    $communIndex .= strval($n + 1);
                                 }
                             }
                             if (!isset($commun[$communIndex])) {
