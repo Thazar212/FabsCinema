@@ -373,7 +373,24 @@ class SudokuSolver extends Command
                     }
                     foreach ($commun as $communIndex => $communValue) {
                         if (strlen($communIndex) === $communValue) {
-                                echo $cellIndex;
+                                $indexes = str_split($communIndex);
+                                $allTrue = true;
+                                foreach ($row as $cellIndex => $cellValue) {
+                                    foreach($indexes as $index) {
+                                        if (!$this->isKthBitSet($cellValue, $index -1)) {
+                                            $allTrue = false;
+                                        }
+                                    }
+                                    for ($n = 0; $n < strlen($cellValue); $n++) {
+                                        if ($this->isKthBitSet($cellValue, $n)) {
+                                            if (($n === $index -1 && !$allTrue) || ($n !== $index -1 && $allTrue)) {
+                                                print "remove Index {$index} from cell {$cellIndex} \n";
+                                            }
+        
+                                        }
+                                    }
+                                }
+
                         }
                     }
                     print("\n");
