@@ -360,15 +360,11 @@ class SudokuSolver extends Command
                             
                             if ($communIndex) {
                                 foreach ($commun as $ci => $cnb) {
-                                    $commSplits = str_split($communIndex);
-                                    $ciSplits = str_split($ci);
-                                    foreach ($commSplits as $commSplit) {
-                                        if (strval($communIndex) != strval($ci) && strpos(strval($commSplit), strval($ci)) !== false) {
-                                            if (strlen($ci) > strlen($communIndex)) {
-                                                unset($commun[$ci]);
-                                                continue(3);
-                                            }
-                                        }
+                                    if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
+                                        continue(2);
+                                    }
+                                    if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
+                                        unset($commun[$ci]);
                                     }
                                 }
                                 if (!isset($commun[$communIndex])) {
@@ -425,10 +421,8 @@ class SudokuSolver extends Command
                                 $ciSplits = str_split($ci);
                                 foreach ($commSplits as $commSplit) {
                                     if (strval($communIndex) != strval($ci) && strpos(strval($commSplit), strval($ci)) !== false) {
-                                        if (strlen($ci) > strlen($communIndex)) {
-                                            unset($commun[$ci]);
-                                            continue(3);
-                                        }
+                                        unset($commun[$ci]);
+                                        continue(3);
                                     }
                                 }
                             }
@@ -467,7 +461,7 @@ class SudokuSolver extends Command
                     }
                     
                 }
-                
+
                 print("column values:");
                 print_r($column);
         }
