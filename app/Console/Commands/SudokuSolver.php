@@ -369,7 +369,7 @@ class SudokuSolver extends Command
                     }
                     foreach($commun as $communIndex => $communValue) {
                         foreach ($commun as $communIndex2 => $communValue2) {
-                            print("{$communIndex} <==> {$communIndex}\n");
+                            print("{$communIndex} <==> {$communIndex2}\n");
                             if ($communIndex === $communIndex2) {
                                 continue;
                             }
