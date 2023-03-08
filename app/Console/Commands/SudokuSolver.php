@@ -354,7 +354,7 @@ class SudokuSolver extends Command
                             }
                             foreach ($commun as $ci => $cnb) {
                                 if ($communIndex != $ci && strpos($communIndex, $ci) !== false) {
-                                    continue(2);
+                                    continue(3);
                                 }
                             }
                             if ($communIndex ) {
