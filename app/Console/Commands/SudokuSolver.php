@@ -338,13 +338,13 @@ class SudokuSolver extends Command
             foreach ($rows as $rowIndex => $row) {
                 $nbCells = count($row);
                 if ($rowIndex === 3) {
+                    $commun = [];
                     foreach ($row as $cellIndex => $cellValue) {
-                        $commun = [];
                         foreach ($row as $cellIndex2 => $cellValue2) {
                             if ($cellIndex >= $cellIndex2) {
                                 continue;
                             }
-                            //print("{$cellIndex} => {$cellValue} :: {$cellIndex2} => {$cellValue2}\n");
+                            print("{$cellIndex} => {$cellValue} :: {$cellIndex2} => {$cellValue2}\n");
                             $communIndex = "";
                             for ($n = 0; $n < strlen($cellValue); $n++) {
                                 if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
@@ -359,9 +359,9 @@ class SudokuSolver extends Command
                                     $commun[$communIndex]++;
                                 }
                             }
-                            print_r($commun);
-                            print("\n");
-                        }                     
+                        }    
+                        print_r($commun);
+                        print("\n");                 
                     }
                     
                     print("{$nbCells} \n");
