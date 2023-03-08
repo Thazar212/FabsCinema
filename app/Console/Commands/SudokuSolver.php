@@ -399,6 +399,62 @@ class SudokuSolver extends Command
                         
                     }
             }
+            foreach ($columns as $columnIndex => $column) {
+                $commun = [];
+                foreach ($column as $cellIndex => $cellValue) {
+                    foreach ($column as $cellIndex2 => $cellValue2) {
+                        if ($cellIndex >= $cellIndex2) {
+                            continue;
+                        }
+                        $communIndex = "";
+                        for ($n = 0; $n < strlen($cellValue); $n++) {
+                            if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
+                                $communIndex .= strval($n + 1);
+
+                            }
+                        }
+                        
+                        if ($communIndex) {
+                            foreach ($commun as $ci => $cnb) {
+                                if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
+                                    continue(2);
+                                }
+                                if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
+                                    unset($commun[$ci]);
+                                }
+                            }
+                            if (!isset($commun[$communIndex])) {
+                                $commun[$communIndex] = 2;
+                            } else {
+                                $commun[$communIndex]++;
+                            }
+                        }
+                    }    
+                                     
+                }
+                foreach ($commun as $communIndex => $communValue) {
+                    if (strlen($communIndex) === $communValue) {
+                        $indexes = str_split($communIndex);
+                        $allTrue = true;
+                        foreach ($row as $cellIndex => $cellValue) {
+                            foreach($indexes as $index) {
+                                if (!$this->isKthBitSet($cellValue, $index -1)) {
+                                    $allTrue = false;
+                                }
+                            }
+                            for ($n = 0; $n < strlen($cellValue); $n++) {
+                                if ($this->isKthBitSet($cellValue, $n)) {
+                                    if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
+                                        print "remove Index " . strval($n + 1) . " from cell {$cellIndex} \n";
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+        }
 
         }
         exit();
