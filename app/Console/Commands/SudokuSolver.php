@@ -438,6 +438,8 @@ class SudokuSolver extends Command
                     }    
                                      
                 }
+                print ("Commun:");
+                print_r($commun);
                 foreach ($commun as $communIndex => $communValue) {
                     if (strlen($communIndex) === $communValue) {
                         $indexes = str_split($communIndex);
@@ -449,7 +451,7 @@ class SudokuSolver extends Command
                                     $allTrue = false;
                                 }
                             }
-                            print ("Cell index: {$cellIndex}, Commun Index: {$communIndex}, All true:{ $allTrue} \n");
+                            //print ("Cell index: {$cellIndex}, Commun Index: {$communIndex}, All true:{ $allTrue} \n");
                             for ($n = 0; $n < strlen($cellValue); $n++) {
                                 if ($this->isKthBitSet($cellValue, $n)) {
                                     if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
