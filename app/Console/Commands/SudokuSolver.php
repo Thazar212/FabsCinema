@@ -384,7 +384,7 @@ class SudokuSolver extends Command
                                 for ($n = 0; $n < strlen($cellValue); $n++) {
                                     if ($this->isKthBitSet($cellValue, $n)) {
                                         if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
-                                            print "remove Index " . $n + 1 . " from cell {$cellIndex} \n";
+                                            print "remove Index " . strval($n + 1) . " from cell {$cellIndex} \n";
                                         }
     
                                     }
