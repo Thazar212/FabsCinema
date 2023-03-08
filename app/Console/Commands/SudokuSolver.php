@@ -399,10 +399,9 @@ class SudokuSolver extends Command
                         
                     }
             }
+            ksort($cols);
             foreach ($cols as $columnIndex => $column) {
                 print_r($cols);
-                print "GRID\n";
-                print_r($grid);
                 exit();
                 print("column: {$columnIndex}\n");
                 $commun = [];
