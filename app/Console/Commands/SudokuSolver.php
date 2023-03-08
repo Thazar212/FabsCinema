@@ -345,7 +345,7 @@ class SudokuSolver extends Command
             }
             foreach ($rows as $rowIndex => $row) {
                 $nbCells = count($row);
-                if ($rowIndex === 7) {
+                
                     $commun = [];
                     foreach ($row as $cellIndex => $cellValue) {
                         foreach ($row as $cellIndex2 => $cellValue2) {
@@ -405,7 +405,7 @@ class SudokuSolver extends Command
                     print("\n");
                     print("{$nbCells} \n");
                     print_r($row);
-                }
+
             }
 
         }
