@@ -162,7 +162,7 @@ class SudokuSolver extends Command
         ];
         $sol = $sol9;
 
-        $level = "Easy";
+        $level = 1;
         $t = true;
         while ($t) {
             $t = false;
@@ -190,7 +190,10 @@ class SudokuSolver extends Command
             if ($t === true) {
                 continue;
             }
-            $level = "medium";
+            if ($level < 2) {
+                $level = 2;
+            }
+            
             $cols = [];
             $rows = [];
             $cells = [];
@@ -266,8 +269,20 @@ class SudokuSolver extends Command
             if ($t === true) {
                 continue;
             }
+            if ($level < 3) {
+                $level = 3;
+            }
+            foreach ($cells as $cellIndex => $cellNums) {
+                foreach ($cellNums as $cellNum => $cellValue) {
+                    if ($cellIndex == 7) {
+                        print("{$cellNum} => {$cellValue} \n");
+                    }
+    
+                }
+            }
 
         }
+        exit();
         ksort($sol);
         print_r($sol);
         print_r($grid);
