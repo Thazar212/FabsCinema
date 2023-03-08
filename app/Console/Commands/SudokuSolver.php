@@ -350,7 +350,6 @@ class SudokuSolver extends Command
                             if ($cellIndex >= $cellIndex2) {
                                 continue;
                             }
-                            //print("{$cellIndex} => {$cellValue} :: {$cellIndex2} => {$cellValue2}\n");
                             $communIndex = "";
                             for ($n = 0; $n < strlen($cellValue); $n++) {
                                 if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
@@ -377,16 +376,10 @@ class SudokuSolver extends Command
                         }    
                                          
                     }
-                    print("Row index: {$rowIndex}\n");
-                    print("commun: ");
-                    print_r($commun);
-                    print("\n");
                     foreach ($commun as $communIndex => $communValue) {
                         if (strlen($communIndex) === $communValue) {
                             $indexes = str_split($communIndex);
                             $allTrue = true;
-                            print("Indexes: ");
-                            print_r($indexes);
                             foreach ($row as $cellIndex => $cellValue) {
                                 foreach($indexes as $index) {
                                     if (!$this->isKthBitSet($cellValue, $index -1)) {
@@ -405,10 +398,6 @@ class SudokuSolver extends Command
                         }
                         
                     }
-                    print("\n");
-                    print("Row values: ");
-                    print_r($row);
-
             }
 
         }
