@@ -355,9 +355,7 @@ class SudokuSolver extends Command
                             
                             if ($communIndex) {
                                 foreach ($commun as $ci => $cnb) {
-                                    print("{$communIndex} => {$ci} \n");
                                     if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
-                                        echo "skip\n";
                                         continue(2);
                                     }
                                     else {
@@ -373,7 +371,11 @@ class SudokuSolver extends Command
                         }    
                                          
                     }
-                    print_r($commun);
+                    foreach ($commun as $communIndex => $communValue) {
+                        if (strlen($communIndex) === $communValue) {
+                                echo $cellIndex;
+                        }
+                    }
                     print("\n");
                     print("{$nbCells} \n");
                     print_r($row);
