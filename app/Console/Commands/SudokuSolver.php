@@ -284,9 +284,7 @@ class SudokuSolver extends Command
                         }
                     }
                     
-                    if ($cellIndex == 7) {
-                        print("CellNum: {$cellNum} => {$cellValue} \n");
-                    }
+
     
                 }
                 for ($n = 1; $n <= 9; $n++) { 
@@ -300,19 +298,40 @@ class SudokuSolver extends Command
                 foreach ($cellValueRows as $value => $row) {
                     if (count($row) === 1) {
                         print "remove value {$value}  from row {$row[0]} \n"; 
+                        foreach($grid as $k => $c) {
+                            if ($c['cell'] != $cellIndex && $c['row'] == $row[0]) {
+                                $values = $this->turnOffK($c['values'], $value);
+                                $pos = $this->findPosition($values);
+                                if ($pos === -1) {
+                                    $grid[$k]['values'] = $values;
+                                } else {
+                                    $t = true;
+                                    $sol[$k] = $pos;
+                                    unset($grid[$k]);
+                                }
+                            }
+                        }
                     }
                 }
                 foreach ($cellValueColumns as $value => $column) {
                     if (count($column) === 1) {
                         print "remove value {$value}  from column {$column[0]} \n"; 
+                        foreach($grid as $k => $c) {
+                            if ($c['cell'] != $cellIndex && $c['column'] == $column[0]) {
+                                $values = $this->turnOffK($c['values'], $value);
+                                $pos = $this->findPosition($values);
+                                if ($pos === -1) {
+                                    $grid[$k]['values'] = $values;
+                                } else {
+                                    $t = true;
+                                    $sol[$k] = $pos;
+                                    unset($grid[$k]);
+                                }
+                            }
+                        }
                     }
                 }
-                if ($cellIndex == 7) {
-                    print_r($cellValueRows);
-                    print("\n");
-                    print_r($cellValueColumns);
-
-                }
+                
             }
 
         }
