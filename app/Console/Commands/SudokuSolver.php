@@ -417,12 +417,16 @@ class SudokuSolver extends Command
                         
                         if ($communIndex) {
                             foreach ($commun as $ci => $cnb) {
-                                if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
-                                    continue(2);
+                                $ciSplits =str_split($communIndex);
+                                foreach ($ciSplits as $ciSplit) {
+                                    if (strval($communIndex) != strval($ci) && strpos(strval($ci), strval($ciSplit)) !== false) {  
+                                        if (strlen($communIndex) >= strlen($ci)) {
+                                            continue(3);
+                                        } else {
+                                            unset($commun[$ci]);
+                                        }                    
                                 }
-                                if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
-                                    unset($commun[$ci]);
-                                }
+                               
                             }
                             if (!isset($commun[$communIndex])) {
                                 $commun[$communIndex] = 2;
