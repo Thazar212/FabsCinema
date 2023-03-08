@@ -336,7 +336,30 @@ class SudokuSolver extends Command
                 $level = 4;
             }
             foreach ($rows as $rowIndex => $row) {
+                $nbCells = count($row);
                 if ($rowIndex === 3) {
+                    foreach ($row as $cellIndex => $cellValue) {
+                        $commun = [];
+                        foreach ($row as $cellIndex2 => $cellValue2) {
+                            if ($cellIndex >= $cellIndex2) {
+                                continue;
+                            }
+                            $communIndex ="";
+                            for ($n = 0; $n < strlen($cellValue); $n++) {
+                                if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
+                                    $communIndex .= (str) ($n + 1);
+                                }
+                            }
+                            if (!isset($commun[$communIndex])) {
+                                $commun[$communIndex] = 1;
+                            } else {
+                                $commun[$communIndex]++;
+                            }
+                        }                     
+                    }
+                    print_r($commun);
+                    print("\n");
+                    print("{$nbCells} \n");
                     print_r($row);
                 }
             }
