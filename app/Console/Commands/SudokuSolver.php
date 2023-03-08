@@ -353,15 +353,17 @@ class SudokuSolver extends Command
                                     echo "\n";
                                 }
                             }
+                            echo $communIndex; 
                             if (!isset($commun[$communIndex])) {
                                 $commun[$communIndex] = 1;
                             } else {
                                 $commun[$communIndex]++;
                             }
+                            print_r($commun);
+                            print("\n");
                         }                     
                     }
-                    print_r($commun);
-                    print("\n");
+                    
                     print("{$nbCells} \n");
                     print_r($row);
                 }
