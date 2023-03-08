@@ -375,8 +375,8 @@ class SudokuSolver extends Command
                                 continue;
                             }
 
-                            for ($i=0;$i<$strCi2;$i++) {
-                                if (stripos($strCi,$strCi2[$i])!==FALSE) {
+                            for ($i = 0; $i < strlen($strCi2); $i++) {
+                                if (strpos($strCi,$strCi2[$i]) !== FALSE) {
                                     $commun[$communIndex] = 99;
                                     $commun[$communIndex2] = 99;
                                 }
