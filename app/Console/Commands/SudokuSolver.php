@@ -381,8 +381,8 @@ class SudokuSolver extends Command
                                 }
                             }
                         }    
-                                         
                     }
+                    print("Row: {$rowIndex}\n");
                     foreach ($commun as $communIndex => $communValue) {
                         if (strlen($communIndex) === $communValue) {
                             $indexes = str_split($communIndex);
@@ -423,7 +423,6 @@ class SudokuSolver extends Command
 
                             }
                         }
-                        print("{$communIndex}\n");
 
                         if ($communIndex) {
                             foreach ($commun as $ci => $cnb) {
