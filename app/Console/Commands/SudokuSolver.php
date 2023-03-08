@@ -417,7 +417,7 @@ class SudokuSolver extends Command
                             }
                         }
                         
-                        if ($rowIndex === 8) {
+                        if ($communIndex === 8) {
                             print ("{$communIndex} \n ");
                         }
                         if ($communIndex) {
