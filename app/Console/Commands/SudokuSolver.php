@@ -256,7 +256,6 @@ class SudokuSolver extends Command
                     if ($count === 1) {
                         foreach ($cells[$cellIndex] as $cellNum => $cellValue) {
                             if ($this->isKthBitSet($cellValue, $index - 1)) {
-                                print("{$cellNum} => {$index} \n");
                                 $t = true;
                                 $sol[$cellNum] = $index;
                                 unset($grid[$cellNum]);
@@ -273,9 +272,23 @@ class SudokuSolver extends Command
                 $level = 3;
             }
             foreach ($cells as $cellIndex => $cellNums) {
+                $cellValueRows = []; 
+                $cellValueColumns = []; 
                 foreach ($cellNums as $cellNum => $cellValue) {
+                    $row = $grid[$cellNum]['row'];
+                    $column = $grid[$cellNum]['column'];
+                    for ($n = 0; $n < strlen(); $n++) {
+                        if ($this->isKthBitSet($cellValue, $n)) {
+                            $cellValueRows[$n+1][] = $row;
+                            $cellValueColumns[$n+1][] = $column;
+                        }
+                    }
+                    
                     if ($cellIndex == 7) {
                         print("CellNum: {$cellNum} => {$cellValue} \n");
+                        print_r($cellValueRows);
+                        print("\n");
+                        print_r($$cellValueColumns);
                     }
     
                 }
