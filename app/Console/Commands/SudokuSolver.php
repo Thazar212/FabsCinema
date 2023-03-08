@@ -424,10 +424,12 @@ class SudokuSolver extends Command
                                     continue;
                                 }
                                 $splitCis = str_split($communIndex);
-                                if (strpos(strval($ci),strval($communIndex)) !== false) {
-                                    unset($commun[$ci]);
+                                foreach ($splitCis as $splitCi) {
+                                    if (strpos(strval($ci),strval($splitCi)) !== false) {
+                                        unset($commun[$ci]);
+                                    }
                                 }
-
+                               
                                 if (strpos(strval($communIndex), strval($ci)) !== false) {
                                     continue(2);
                                 }
