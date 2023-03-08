@@ -409,7 +409,6 @@ class SudokuSolver extends Command
             }
             ksort($cols);
             foreach ($cols as $columnIndex => $column) {
-                if ($columnIndex === 8) {
                 print("column: {$columnIndex}\n");
                 $commun = [];
                 foreach ($column as $cellIndex => $cellValue) {
@@ -479,7 +478,6 @@ class SudokuSolver extends Command
 
                 print("column values:");
                 print_r($column);
-            }   
         }
 
         }
