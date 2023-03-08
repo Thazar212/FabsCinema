@@ -420,7 +420,7 @@ class SudokuSolver extends Command
 
                         if ($communIndex) {
                             foreach ($commun as $ci => $cnb) {
-                                if (strval($communIndex) === strval($ci) strlen($communIndex) === 1) {
+                                if (strval($communIndex) === strval($ci) || strlen($communIndex) === 1) {
                                     continue;
                                 }
                                 
