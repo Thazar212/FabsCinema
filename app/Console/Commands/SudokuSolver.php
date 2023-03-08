@@ -289,6 +289,14 @@ class SudokuSolver extends Command
                     }
     
                 }
+                for ($n = 1; $n <= 9; $n++) { 
+                    if (isset($cellValueRows[$n])) {
+                        $cellValueRows[$n] = array_unique($cellValueRows[$n]);
+                    }
+                    if (isset($cellValueColumns[$n])) {
+                        $cellValueColumns[$n] = array_unique($cellValueColumns[$n]);
+                    }
+                }
                 if ($cellIndex == 7) {
                     print_r($cellValueRows);
                     print("\n");
