@@ -457,7 +457,7 @@ class SudokuSolver extends Command
                     
                 }
                 print("column: {$columnIndex}\n");
-                print("column values:")
+                print("column values:");
                 print_r($column);
         }
 
