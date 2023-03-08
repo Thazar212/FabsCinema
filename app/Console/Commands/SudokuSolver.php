@@ -373,30 +373,31 @@ class SudokuSolver extends Command
                     }
                     foreach ($commun as $communIndex => $communValue) {
                         if (strlen($communIndex) === $communValue) {
-                                $indexes = str_split($communIndex);
-                                $allTrue = true;
-                                print_r($indexes);
-                                foreach ($row as $cellIndex => $cellValue) {
-                                    foreach($indexes as $index) {
-                                        if (!$this->isKthBitSet($cellValue, $index -1)) {
-                                            $allTrue = false;
-                                        }
+                            $indexes = str_split($communIndex);
+                            $allTrue = true;
+                            print_r($indexes);
+                            foreach ($row as $cellIndex => $cellValue) {
+                                foreach($indexes as $index) {
+                                    if (!$this->isKthBitSet($cellValue, $index -1)) {
+                                        $allTrue = false;
                                     }
-                                    for ($n = 0; $n < strlen($cellValue); $n++) {
-                                        if ($this->isKthBitSet($cellValue, $n)) {
-                                            if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
-                                                print "remove Index " . strval($n + 1) . " from cell {$cellIndex} \n";
-                                            }
-        
+                                }
+                                for ($n = 0; $n < strlen($cellValue); $n++) {
+                                    if ($this->isKthBitSet($cellValue, $n)) {
+                                        if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
+                                            print "remove Index " . strval($n + 1) . " from cell {$cellIndex} \n";
                                         }
+    
                                     }
                                 }
                             }
                         }
+                        
                     }
                     print("\n");
                     print("{$nbCells} \n");
                     print_r($row);
+                }
             }
 
         }
