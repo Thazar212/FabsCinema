@@ -297,6 +297,16 @@ class SudokuSolver extends Command
                         $cellValueColumns[$n] = array_unique($cellValueColumns[$n]);
                     }
                 }
+                foreach ($cellValueRows as $value => $row) {
+                    if (count($row) === 1) {
+                        print "remove value {$value}  from row {$row[0]} \n"; 
+                    }
+                }
+                foreach ($cellValueColumns as $value => $column) {
+                    if (count($column) === 1) {
+                        print "remove value {$value}  from column {$column[0]} \n"; 
+                    }
+                }
                 if ($cellIndex == 7) {
                     print_r($cellValueRows);
                     print("\n");
