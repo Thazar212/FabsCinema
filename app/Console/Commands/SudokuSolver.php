@@ -360,12 +360,19 @@ class SudokuSolver extends Command
                             
                             if ($communIndex) {
                                 foreach ($commun as $ci => $cnb) {
-                                    if (strval($communIndex) != strval($ci) && strpos(strval($communIndex), strval($ci)) !== false) {
+                                    if (strval($communIndex) === strval($ci)) {
+                                        continue;
+                                    }
+                                    $splitCis = str_split($ci);
+                                    foreach ($splitCis as $splitCi) {
+                                        if (strpos(strval($communIndex),strval($splitCi)) !== false) {
+                                            unset($commun[$ci]);
+                                        }
+                                    }
+                                    if (strpos(strval($communIndex), strval($ci)) !== false) {
                                         continue(2);
                                     }
-                                    if (strval($communIndex) != strval($ci) && strpos(strval($ci),strval($communIndex)) !== false) {
-                                        unset($commun[$ci]);
-                                    }
+                                    
                                 }
                                 if (!isset($commun[$communIndex])) {
                                     $commun[$communIndex] = 2;
