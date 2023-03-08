@@ -275,7 +275,7 @@ class SudokuSolver extends Command
             foreach ($cells as $cellIndex => $cellNums) {
                 foreach ($cellNums as $cellNum => $cellValue) {
                     if ($cellIndex == 7) {
-                        print("{$cellNum} => {$cellValue} \n");
+                        print("CellNum: {$cellNum} => {$cellValue} \n");
                     }
     
                 }
