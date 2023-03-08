@@ -375,6 +375,7 @@ class SudokuSolver extends Command
                         if (strlen($communIndex) === $communValue) {
                                 $indexes = str_split($communIndex);
                                 $allTrue = true;
+                                print_r($indexes);
                                 foreach ($row as $cellIndex => $cellValue) {
                                     foreach($indexes as $index) {
                                         if (!$this->isKthBitSet($cellValue, $index -1)) {
