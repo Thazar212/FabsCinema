@@ -241,7 +241,6 @@ class SudokuSolver extends Command
         }
 
         }
-
         ksort($this->sol);
         print_r($this->sol);
         print_r($this->grid);
@@ -378,6 +377,7 @@ class SudokuSolver extends Command
                 }
             }
         }
+    }
 
     public function removeUniqueLineInCell($cat)
     {
