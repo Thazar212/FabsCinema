@@ -411,7 +411,7 @@ class SudokuSolver extends Command
                 if (strlen($communIndex) === $communValue) {
                     foreach ($catValue as $cellIndex => $cellValue) {
                         $bitsOn = $this->getBitsOn($cellValue);
-                        if ($communIndex === $bitsOn[0]) {
+                        if ($communIndex == $bitsOn[0]) {
                             continue;
                         } 
                         for ($n = 0; $n < strlen($cellValue); $n++) {
