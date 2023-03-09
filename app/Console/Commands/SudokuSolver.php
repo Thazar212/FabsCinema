@@ -270,8 +270,8 @@ class SudokuSolver extends Command
         foreach($this->grid as $k => $v) {
             $cells[$v['cell']][$k]  = $v['values'];
         }
+        $cellValueCats = [];
         foreach ($cells as $cellIndex => $cellNums) {
-            $cellValueCats = [];
             foreach ($cellNums as $cellNum => $cellValue) {
                 $category = $this->grid[$cellNum][$cat];
                 $bitsOn = $this->getBitsOn($cellValue);
@@ -280,27 +280,25 @@ class SudokuSolver extends Command
                 }
             }
         }
-        if (isset($cellValueCats)) {
-            foreach ($cellValueCats as $k => $v) {
-                $cellValueCats[$k] = array_unique($cellValueCats[$k]);
-            }
-            
-            foreach ($cellValueCats as $value => $category) {
-                if (count($category) === 1) {
-                    foreach($this->grid as $k => $c) {
-                        if ($c['cell'] != $cellIndex && $c[$cat] == $category[0]) {
-                            $values = $this->turnOffK($c['values'], $value);
-                            $pos = $this->findPosition($values);
-                            if ($pos === -1) {
-                                $this->grid[$k]['values'] = $values;
-                            } else {
-                                $this->fillSolution($k, $pos);
-                            }
+        foreach ($cellValueCats as $k => $v) {
+            $cellValueCats[$k] = array_unique($cellValueCats[$k]);
+        }
+        
+        foreach ($cellValueCats as $value => $category) {
+            if (count($category) === 1) {
+                foreach($this->grid as $k => $c) {
+                    if ($c['cell'] != $cellIndex && $c[$cat] == $category[0]) {
+                        $values = $this->turnOffK($c['values'], $value);
+                        $pos = $this->findPosition($values);
+                        if ($pos === -1) {
+                            $this->grid[$k]['values'] = $values;
+                        } else {
+                            $this->fillSolution($k, $pos);
                         }
                     }
                 }
-            }    
-        }
+            }
+        }    
     }
 
     public function setLevel($num) 
@@ -405,6 +403,9 @@ class SudokuSolver extends Command
                 }    
             }
             
+            print("{$cat}: {$catIndex} \n");
+            print_r($twins);
+            print("\n\n");
             foreach ($twins as $communIndex => $communValue) {
                 if (strlen($communIndex) === $communValue) {
                     $indexes = str_split($communIndex);
