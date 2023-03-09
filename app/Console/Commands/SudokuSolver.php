@@ -55,12 +55,12 @@ class SudokuSolver extends Command
         
         $level = 1;
         $this->t = true;
-        while ($t) {
+        while ($this->t) {
             $this->t = false;
             //fill only possible answers
             $this->removeSolvedFromGrid();
 
-            if ($t === true) {
+            if ($this->t === true) {
                 continue;
             }
             if ($level < 2) {
@@ -68,17 +68,17 @@ class SudokuSolver extends Command
             }
             
             $this->solveUniqueFromCategory('column');
-            if ($t === true) {
+            if ($this->t === true) {
                 continue;
             }
 
             $this->solveUniqueFromCategory('row');
-            if ($t === true) {
+            if ($this->t  === true) {
                 continue;
             }
 
             $this->solveUniqueFromCategory('cell');
-            if ($t === true) {
+            if ($this->t  === true) {
                 continue;
             }
 
