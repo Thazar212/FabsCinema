@@ -106,7 +106,24 @@ class SudokuSolver extends Command
                 continue;
             }   
 
+            $this->checkfortwins('row');            
+            if ($this->t  === true) {
+                continue;
+            }   
+
+            $this->checkfortwins('column');            
+            if ($this->t  === true) {
+                continue;
+            }   
+
+            $this->checkfortwins('cell');            
+            if ($this->t  === true) {
+                continue;
+            }   
+
             $this->t = $this->z;
+
+
         }
         ksort($this->sol);
         print_r($this->sol);
@@ -348,7 +365,6 @@ class SudokuSolver extends Command
                                     } else {
                                         $this->fillSolution($cellIndex, $pos);
                                     }
-                                    print "removed Index " . strval($n + 1) . " from cell {$cellIndex} \n";
                                 }
                             }
                         }
@@ -364,6 +380,56 @@ class SudokuSolver extends Command
         $category = [];
         foreach($this->grid as $k => $v) {
             $category[$v[$cat]][$k] = $v['values'];
+        }
+
+        foreach ($category as $catIndex => $catValue) {
+            $twins = [];
+            foreach ($catValue as $cellIndex => $cellValue) {
+                foreach ($catValue as $cellIndex2 => $cellValue2) {
+                    if ($cellIndex >= $cellIndex2) {
+                        continue;
+                    }
+
+                    $bitsOn = $this->getBitsOn($cellValue);
+                    $bitsOn2 = $this->getBitsOn($cellValue2);
+                
+                    if ($bitsOn[0] === $bitsOn2[0]) {
+                        if (!isset($twins[$bitsOn[0]])) {
+                            $twins[$bitsOn[0]] = 2;
+                        } else {
+                            $twins[$bitsOn[0]]++;
+                        }
+                    }
+                }    
+            }
+            
+            foreach ($twins as $communIndex => $communValue) {
+                if (strlen($communIndex) === $communValue) {
+                    $indexes = str_split($communIndex);
+                    foreach ($catValue as $cellIndex => $cellValue) {
+                        $allTrue = true;
+                        foreach($indexes as $index) {
+                            if (!$this->isKthBitSet($cellValue, $index -1)) {
+                                $allTrue = false;
+                            }
+                        }
+                        for ($n = 0; $n < strlen($cellValue); $n++) {
+                            if ($this->isKthBitSet($cellValue, $n)) {
+                                if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
+                                    $values = $this->turnOffK($cellValue, $n + 1);
+                                    $pos = $this->findPosition($values);
+                                    if ($pos === -1) {
+                                        $this->grid[$cellIndex]['values'] = $values;
+                                        $this->z = true;
+                                    } else {
+                                        $this->fillSolution($cellIndex, $pos);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }                
+            }        
         }
     }
 
