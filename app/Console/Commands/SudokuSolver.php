@@ -57,6 +57,7 @@ class SudokuSolver extends Command
         $this->t = true;
         while ($this->t) {
             $this->t = false;
+            $this->z = false;
             //fill only possible answers
             $this->removeSolvedFromGrid();
 
@@ -93,7 +94,7 @@ class SudokuSolver extends Command
             if ($this->t  === true) {
                 continue;
             }
-            
+            /*
             $this->removeUniqueMultiples('column');
             if ($this->t  === true) {
                 continue;
@@ -103,7 +104,7 @@ class SudokuSolver extends Command
             if ($this->t  === true) {
                 continue;
             }   
-
+            */
         }
         ksort($this->sol);
         print_r($this->sol);
@@ -339,12 +340,12 @@ class SudokuSolver extends Command
                                     $pos = $this->findPosition($values);
                                     if ($pos === -1) {
                                         $this->grid[$cellIndex]['values'] = $values;
+                                        $this->z = true;
                                     } else {
                                         $this->fillSolution($cellIndex, $pos);
                                     }
                                     print "removed Index " . strval($n + 1) . " from cell {$cellIndex} \n";
                                 }
-
                             }
                         }
                     }
