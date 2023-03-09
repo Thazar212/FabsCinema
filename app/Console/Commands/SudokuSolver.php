@@ -407,6 +407,7 @@ class SudokuSolver extends Command
             print_r($twins);
             print("\n\n");
             foreach ($twins as $communIndex => $communValue) {
+                $indexes = str_split($communIndex);
                 if (strlen($communIndex) === $communValue) {
                     foreach ($catValue as $cellIndex => $cellValue) {
                         $bitsOn = $this->getBitsOn($cellValue);
