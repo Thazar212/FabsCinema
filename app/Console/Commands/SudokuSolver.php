@@ -403,9 +403,6 @@ class SudokuSolver extends Command
                 }    
             }
             
-            print("{$cat}: {$catIndex} \n");
-            print_r($twins);
-            print("\n\n");
             foreach ($twins as $communIndex => $communValue) {
                 $indexes = str_split($communIndex);
                 if (strlen($communIndex) === $communValue) {
@@ -424,10 +421,8 @@ class SudokuSolver extends Command
                                         $this->z = true;
                                     } else {
                                         $this->fillSolution($cellIndex, $pos);
-                                        print("solution: {$cellIndex} => {$pos} \n");
                                     }
                                     $l = $n + 1;
-                                    print("remove value {$l} fron cell {$cellIndex}\n");
                                 }
                             }
                         }
