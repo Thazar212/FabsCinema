@@ -53,7 +53,7 @@ class SudokuSolver extends Command
             73 => 8, 75 => 6, 80 => 7,
         ];
         
-        $level = 1;
+        $this->setLevel(1);
         $this->t = true;
         while ($this->t) {
             $this->t = false;
@@ -62,9 +62,6 @@ class SudokuSolver extends Command
 
             if ($this->t === true) {
                 continue;
-            }
-            if ($level < 2) {
-                $level = 2;
             }
             
             $this->solveUniqueFromCategory('column');
@@ -82,75 +79,18 @@ class SudokuSolver extends Command
                 continue;
             }
 
-            if ($level < 3) {
-                $level = 3;
-            }
-
-            $cells = [];
-            foreach($this->grid as $k => $v) {
-                $cells[$v['cell']][$k]  = $v['values'];
-            }
-            foreach ($cells as $cellIndex => $cellNums) {
-                $cellValueRows = []; 
-                $cellValueColumns = []; 
-                foreach ($cellNums as $cellNum => $cellValue) {
-                    $row = $this->grid[$cellNum]['row'];
-                    $column = $this->grid[$cellNum]['column'];
-                    for ($n = 0; $n < strlen($cellValue); $n++) {
-                        if ($this->isKthBitSet($cellValue, $n)) {
-                            $cellValueRows[$n+1][] = $row;
-                            $cellValueColumns[$n+1][] = $column;
-                        }
-                    }
-    
-                }
-                for ($n = 1; $n <= 9; $n++) { 
-                    if (isset($cellValueRows[$n])) {
-                        $cellValueRows[$n] = array_unique($cellValueRows[$n]);
-                    }
-                    if (isset($cellValueColumns[$n])) {
-                        $cellValueColumns[$n] = array_unique($cellValueColumns[$n]);
-                    }
-                }
-                foreach ($cellValueRows as $value => $row) {
-                    if (count($row) === 1) {
-                        foreach($this->grid as $k => $c) {
-                            if ($c['cell'] != $cellIndex && $c['row'] == $row[0]) {
-                                $values = $this->turnOffK($c['values'], $value);
-                                $pos = $this->findPosition($values);
-                                if ($pos === -1) {
-                                    $this->grid[$k]['values'] = $values;
-                                } else {
-                                    $this->t = true;
-                                    $this->sol[$k] = $pos;
-                                    unset($this->grid[$k]);
-                                }
-                            }
-                        }
-                    }
-                }
-                foreach ($cellValueColumns as $value => $column) {
-                    if (count($column) === 1) {
-                        foreach($this->grid as $k => $c) {
-                            if ($c['cell'] != $cellIndex && $c['column'] == $column[0]) {
-                                $values = $this->turnOffK($c['values'], $value);
-                                $pos = $this->findPosition($values);
-                                if ($pos === -1) {
-                                    $this->grid[$k]['values'] = $values;
-                                } else {
-                                    $this->t = true;
-                                    $this->sol[$k] = $pos;
-                                    unset($this->grid[$k]);
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            }
-            if ($this->t === true) {
+            $this->removeUniqueLineInCell('row');
+            if ($this->t  === true) {
                 continue;
             }
+            
+            $this->removeUniqueLineInCell('column');
+            if ($this->t  === true) {
+                continue;
+            }
+            
+
+
             if ($level < 4) {
                 $level = 4;
             }
@@ -301,7 +241,7 @@ class SudokuSolver extends Command
         }
 
         }
-        exit();
+
         ksort($this->sol);
         print_r($this->sol);
         print_r($this->grid);
@@ -411,6 +351,7 @@ class SudokuSolver extends Command
 
     public function solveUniqueFromCategory($cat)
     {
+        $this->setLevel(2);
         $categoryData = [];
         $counts = [];
         for ($i = 1; $i <= 9; $i++) {
@@ -436,6 +377,50 @@ class SudokuSolver extends Command
                     
                 }
             }
+        }
+
+    public function removeUniqueLineInCell($cat)
+    {
+        $this->setLevel(3);
+        $cells = [];
+        foreach($this->grid as $k => $v) {
+            $cells[$v['cell']][$k]  = $v['values'];
+        }
+        foreach ($cells as $cellIndex => $cellNums) {
+            $cellValueCat = [];
+            foreach ($cellNums as $cellNum => $cellValue) {
+                $category = $this->grid[$cellNum][$cat];
+                $bitsOn = $this->getBitsOn($cellValue);
+                foreach ($bitsOn[1] as $bitOn) {
+                    $cellValueCats[$bitOn][] = $category;
+                }
+            }
+        }
+        foreach ($cellValueCats as $k => $v) {
+            $cellValueCats[$k] = array_unique($cellValueCats[$k]);
+        }
+        
+        foreach ($cellValueCats as $value => $category) {
+            if (count($category) === 1) {
+                foreach($this->grid as $k => $c) {
+                    if ($c['cell'] != $cellIndex && $c[$cat] == $category[0]) {
+                        $values = $this->turnOffK($c['values'], $value);
+                        $pos = $this->findPosition($values);
+                        if ($pos === -1) {
+                            $this->grid[$k]['values'] = $values;
+                        } else {
+                            $this->fillSolution($k, $pos);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function setLevel($num) 
+    {
+        if ($num > $this->level) {
+            $this->level = $num;
         }
     }
 }
