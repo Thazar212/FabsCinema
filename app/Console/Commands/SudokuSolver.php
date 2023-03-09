@@ -271,7 +271,7 @@ class SudokuSolver extends Command
             $cells[$v['cell']][$k]  = $v['values'];
         }
         foreach ($cells as $cellIndex => $cellNums) {
-            $cellValueCat = [];
+            $cellValueCats = [];
             foreach ($cellNums as $cellNum => $cellValue) {
                 $category = $this->grid[$cellNum][$cat];
                 $bitsOn = $this->getBitsOn($cellValue);
