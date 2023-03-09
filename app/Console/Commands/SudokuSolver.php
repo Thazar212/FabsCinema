@@ -89,152 +89,20 @@ class SudokuSolver extends Command
                 continue;
             }
             
-            $this->setLevel(4);
-            $cols = [];
-            $rows = [];
-            $cells = [];
-            foreach($this->grid as $k => $v) {
-                $cols[$v['column']][$k] = $v['values'];
-                $rows[$v['row']][$k]    = $v['values'];
-                $cells[$v['cell']][$k]  = $v['values'];
+            $this->removeUniqueMultiples('row');
+            if ($this->t  === true) {
+                continue;
             }
-            foreach ($rows as $rowIndex => $row) {
-                    $commun = [];
-                    foreach ($row as $cellIndex => $cellValue) {
-                        foreach ($row as $cellIndex2 => $cellValue2) {
-                            if ($cellIndex >= $cellIndex2) {
-                                continue;
-                            }
-                            $communIndex = "";
-                            for ($n = 0; $n < strlen($cellValue); $n++) {
-                                if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
-                                    $communIndex .= strval($n + 1);
-
-                                }
-                            }
-                            
-                            if ($communIndex) {
-                                if (!isset($commun[$communIndex])) {
-                                    $commun[$communIndex] = 2;
-                                } else {
-                                    $commun[$communIndex]++;
-                                }
-                            }
-                        }    
-                    }
-                    foreach($commun as $communIndex => $communValue) {
-                        foreach ($commun as $communIndex2 => $communValue2) {
-                            $strCi = strval($communIndex);
-                            $strCi2 = strval($communIndex2);
-                            if ($strCi === $strCi2) {
-                                continue;
-                            }
-
-                            for ($i = 0; $i < strlen($strCi2); $i++) {
-                                if (strpos($strCi,$strCi2[$i]) !== FALSE) {
-                                    $commun[$communIndex] = 99;
-                                    $commun[$communIndex2] = 99;
-                                }
-                            }
-                        }
-                    }
-
-                    foreach ($commun as $communIndex => $communValue) {
-                        if (strlen($communIndex) === $communValue) {
-                            $indexes = str_split($communIndex);
-                            foreach ($row as $cellIndex => $cellValue) {
-                                $allTrue = true;
-                                foreach($indexes as $index) {
-                                    if (!$this->isKthBitSet($cellValue, $index -1)) {
-                                        $allTrue = false;
-                                    }
-                                }
-                                for ($n = 0; $n < strlen($cellValue); $n++) {
-                                    if ($this->isKthBitSet($cellValue, $n)) {
-                                        if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
-                                            print "remove Index " . strval($n + 1) . " from cell {$cellIndex} \n";
-                                        }
-    
-                                    }
-                                }
-                            }
-                        }
-                        
-                    }
+            
+            $this->removeUniqueMultiples('column');
+            if ($this->t  === true) {
+                continue;
             }
-            ksort($cols);
-            foreach ($cols as $columnIndex => $column) {
-                print("column: {$columnIndex}\n");
-                $commun = [];
-                $twins = [];
-                foreach ($column as $cellIndex => $cellValue) {
-                    foreach ($column as $cellIndex2 => $cellValue2) {
-                        if ($cellIndex >= $cellIndex2) {
-                            continue;
-                        }
-                        $communIndex = "";
-                        for ($n = 0; $n < strlen($cellValue); $n++) {
-                            if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
-                                $communIndex .= strval($n + 1);
 
-                            }
-                        }
-
-                        if ($communIndex) {
-                            if (!isset($commun[$communIndex])) {
-                                $commun[$communIndex] = 2;
-                            } else {
-                                $commun[$communIndex]++;
-                            }
-                        }
-                    }                  
-                }
-
-                foreach($commun as $communIndex => $communValue) {
-                    foreach ($commun as $communIndex2 => $communValue2) {
-                        $strCi = strval($communIndex);
-                        $strCi2 = strval($communIndex2);
-                        if ($strCi === $strCi2) {
-                            continue;
-                        }
-
-                        for ($i = 0; $i < strlen($strCi2); $i++) {
-                            if (strpos($strCi,$strCi2[$i]) !== FALSE) {
-                                $commun[$communIndex] = 99;
-                                $commun[$communIndex2] = 99;
-                            }
-                        }
-                    }
-                }
-                print ("Commun:");
-                print_r($commun);
-                foreach ($commun as $communIndex => $communValue) {
-                    if (strlen($communIndex) === $communValue) {
-                        $indexes = str_split($communIndex);
-                        foreach ($column as $cellIndex => $cellValue) {
-                            $allTrue = true;
-                            foreach($indexes as $index) {
-                                if (!$this->isKthBitSet($cellValue, $index -1)) {
-                                    $allTrue = false;
-                                }
-                            }
-                            print ("Cell index: {$cellIndex}, Commun Index: {$communIndex}, All true:{ $allTrue} \n");
-                            for ($n = 0; $n < strlen($cellValue); $n++) {
-                                if ($this->isKthBitSet($cellValue, $n)) {
-                                    if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
-                                        print "remove Index " . strval($n + 1) . " from cell {$cellIndex} \n";
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                    
-                }
-
-                print("column values:");
-                print_r($column);
-        }
+            $this->removeUniqueMultiples('cell');
+            if ($this->t  === true) {
+                continue;
+            }   
 
         }
         ksort($this->sol);
@@ -304,15 +172,13 @@ class SudokuSolver extends Command
     {
         $bitsOnString = "";
         $bitsOnArray = [];
-        $bitsOnCount = 0;
         for ($n = 0; $n < strlen($b); $n++) {
             if ($this->isKthBitSet($b, $n)) {
                 $bitsOnString .= strval($n + 1);
                 $bitsOnArray[] = strval($n + 1);
-                $bitsOnCount++;   
             }
         }
-        return [$bitsOnString, $bitsOnArray, $bitsOnCount];
+        return [$bitsOnString, $bitsOnArray, count($bitsOnArray)];
     }
 
     public function fillSolution($index, $value) {
@@ -422,4 +288,96 @@ class SudokuSolver extends Command
             $this->level = $num;
         }
     }
+
+    public function removeUniqueMultiples($cat)
+    {
+        $this->setLevel(4);
+        $category = [];
+        foreach($this->grid as $k => $v) {
+            $category[$v[$cat]][$k] = $v['values'];
+        }
+
+        foreach ($category as $catIndex => $catValue) {
+            $commun = [];
+            foreach ($catValue as $cellIndex => $cellValue) {
+                foreach ($catValue as $cellIndex2 => $cellValue2) {
+                    if ($cellIndex >= $cellIndex2) {
+                        continue;
+                    }
+                    $communIndex = "";
+                    for ($n = 0; $n < strlen($cellValue); $n++) {
+                        if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
+                            $communIndex .= strval($n + 1);
+
+                        }
+                    }
+                    if ($communIndex) {
+                        if (!isset($commun[$communIndex])) {
+                            $commun[$communIndex] = 2;
+                        } else {
+                            $commun[$communIndex]++;
+                        }
+                    }
+                }    
+            }
+            $commun = $this->filterIndexes($commun);
+
+            foreach ($commun as $communIndex => $communValue) {
+                if (strlen($communIndex) === $communValue) {
+                    $indexes = str_split($communIndex);
+                    foreach ($catValue as $cellIndex => $cellValue) {
+                        $allTrue = true;
+                        foreach($indexes as $index) {
+                            if (!$this->isKthBitSet($cellValue, $index -1)) {
+                                $allTrue = false;
+                            }
+                        }
+                        for ($n = 0; $n < strlen($cellValue); $n++) {
+                            if ($this->isKthBitSet($cellValue, $n)) {
+                                if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
+                                    $values = $this->turnOffK($cellValue, $n = 1);
+                                    $pos = $this->findPosition($values);
+                                    if ($pos === -1) {
+                                        $this->grid[$cellIndex]['values'] = $values;
+                                    } else {
+                                        $this->fillSolution($cellIndex, $pos);
+                                    }
+                                    print "removed Index " . strval($n + 1) . " from cell {$cellIndex} \n";
+                                }
+
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+
+    public function filterIndexes($commun) 
+    {
+        foreach($commun as $communIndex => $communValue) {
+            foreach ($commun as $communIndex2 => $communValue2) {
+                $strCi = strval($communIndex);
+                $strCi2 = strval($communIndex2);
+                if ($strCi === $strCi2) {
+                    continue;
+                }
+
+                for ($i = 0; $i < strlen($strCi2); $i++) {
+                    if (strpos($strCi,$strCi2[$i]) !== FALSE) {
+                        $commun[$communIndex] = 99;
+                        $commun[$communIndex2] = 99;
+                    }
+                }
+            }
+        }
+        foreach($commun as $communIndex => $communValue) {
+            if ($communValue === 99) {
+                unset($commun[$communIndex]);
+            }
+        }
+        return $commun;
+    }
+
 }
