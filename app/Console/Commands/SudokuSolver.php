@@ -148,7 +148,7 @@ class SudokuSolver extends Command
                 }
                 
             }
-            if ($t === true) {
+            if ($this->t === true) {
                 continue;
             }
             if ($level < 4) {
