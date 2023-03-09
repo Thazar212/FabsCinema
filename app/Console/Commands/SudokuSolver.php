@@ -95,7 +95,7 @@ class SudokuSolver extends Command
             if ($this->t  === true) {
                 continue;
             }
-            /*
+            
             $this->removeUniqueMultiples('column');
             if ($this->t  === true) {
                 continue;
@@ -105,7 +105,7 @@ class SudokuSolver extends Command
             if ($this->t  === true) {
                 continue;
             }   
-            */
+            
         }
         ksort($this->sol);
         print_r($this->sol);
