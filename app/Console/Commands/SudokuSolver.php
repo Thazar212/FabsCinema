@@ -245,7 +245,7 @@ class SudokuSolver extends Command
         print_r($this->sol);
         print_r($this->grid);
         print("\n");
-        print ("{$level}\n");
+        print ("{$this->level}\n");
 
 
     }
