@@ -89,11 +89,7 @@ class SudokuSolver extends Command
                 continue;
             }
             
-
-
-            if ($level < 4) {
-                $level = 4;
-            }
+            $this->setLevel(4);
             $cols = [];
             $rows = [];
             $cells = [];
