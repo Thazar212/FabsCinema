@@ -353,8 +353,9 @@ class SudokuSolver extends Command
                 }
                 
             }
-            exit();
+           
         }
+        exit();
     }
 
     public function filterIndexes($commun) 
