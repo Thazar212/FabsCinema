@@ -323,7 +323,8 @@ class SudokuSolver extends Command
                 }    
             }
             $commun = $this->filterIndexes($commun);
-
+            print_r($commun);
+            exit();
             foreach ($commun as $communIndex => $communValue) {
                 if (strlen($communIndex) === $communValue) {
                     $indexes = str_split($communIndex);
