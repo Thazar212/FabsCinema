@@ -350,10 +350,8 @@ class SudokuSolver extends Command
                             }
                         }
                     }
-                }
-                
-            }
-           
+                }                
+            }        
         }
     }
 
