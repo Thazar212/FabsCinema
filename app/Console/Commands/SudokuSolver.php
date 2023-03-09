@@ -419,6 +419,9 @@ class SudokuSolver extends Command
 
     public function setLevel($num) 
     {
+        if (!isset($this->level)) {
+            $this->level = 0;
+        } 
         if ($num > $this->level) {
             $this->level = $num;
         }
