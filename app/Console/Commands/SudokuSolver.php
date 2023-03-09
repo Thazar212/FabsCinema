@@ -90,7 +90,7 @@ class SudokuSolver extends Command
                 continue;
             }
             
-            /*
+            
             $this->removeUniqueMultiples('row');
             if ($this->t  === true) {
                 continue;
