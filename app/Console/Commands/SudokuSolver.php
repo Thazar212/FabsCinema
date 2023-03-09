@@ -54,7 +54,7 @@ class SudokuSolver extends Command
         ];
         
         $this->setLevel(1);
-        $this->t = true;
+        $this->t = true;        
         while ($this->t) {
             $this->t = false;
             $this->z = false;
@@ -105,7 +105,8 @@ class SudokuSolver extends Command
             if ($this->t  === true) {
                 continue;
             }   
-            
+
+            $this->t = $this->z;
         }
         ksort($this->sol);
         print_r($this->sol);
