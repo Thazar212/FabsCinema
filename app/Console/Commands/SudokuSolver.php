@@ -85,6 +85,11 @@ class SudokuSolver extends Command
             if ($level < 3) {
                 $level = 3;
             }
+
+            $cells = [];
+            foreach($this->grid as $k => $v) {
+                $cells[$v['cell']][$k]  = $v['values'];
+            }
             foreach ($cells as $cellIndex => $cellNums) {
                 $cellValueRows = []; 
                 $cellValueColumns = []; 
