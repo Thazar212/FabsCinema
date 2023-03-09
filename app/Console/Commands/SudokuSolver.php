@@ -298,7 +298,8 @@ class SudokuSolver extends Command
         foreach($this->grid as $k => $v) {
             $category[$v[$cat]][$k] = $v['values'];
         }
-
+        print_r($category);
+        
         foreach ($category as $catIndex => $catValue) {
             $commun = [];
             foreach ($catValue as $cellIndex => $cellValue) {
