@@ -110,7 +110,8 @@ class SudokuSolver extends Command
         }
         ksort($this->sol);
         print_r($this->sol);
-        print("\n\n###{count($this->sol)}###\n\n");
+        $count_sol = count($this->sol);
+        print("\n\n### {$count_sol} ###\n\n");
         print_r($this->grid);
         print("\n");
         print ("{$this->level}\n");
