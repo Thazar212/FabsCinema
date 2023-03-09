@@ -298,7 +298,6 @@ class SudokuSolver extends Command
         foreach($this->grid as $k => $v) {
             $category[$v[$cat]][$k] = $v['values'];
         }
-        print_r($category);
         
         foreach ($category as $catIndex => $catValue) {
             $commun = [];
@@ -324,8 +323,7 @@ class SudokuSolver extends Command
                 }    
             }
             $commun = $this->filterIndexes($commun);
-            print_r($commun);
-            exit();
+            
             foreach ($commun as $communIndex => $communValue) {
                 if (strlen($communIndex) === $communValue) {
                     $indexes = str_split($communIndex);
@@ -355,6 +353,7 @@ class SudokuSolver extends Command
                 }
                 
             }
+            exit();
         }
     }
 
