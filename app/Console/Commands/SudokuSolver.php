@@ -426,7 +426,9 @@ class SudokuSolver extends Command
                                         $this->z = true;
                                     } else {
                                         $this->fillSolution($cellIndex, $pos);
+                                        print("solution: {$cellIndex} => {$pos} \n");
                                     }
+                                    print("remove value {$pos} fron cell {$cellIndex}\n");
                                 }
                             }
                         }
