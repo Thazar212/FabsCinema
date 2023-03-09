@@ -337,7 +337,7 @@ class SudokuSolver extends Command
                         for ($n = 0; $n < strlen($cellValue); $n++) {
                             if ($this->isKthBitSet($cellValue, $n)) {
                                 if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
-                                    $values = $this->turnOffK($cellValue, $n = 1);
+                                    $values = $this->turnOffK($cellValue, $n + 1);
                                     $pos = $this->findPosition($values);
                                     if ($pos === -1) {
                                         $this->grid[$cellIndex]['values'] = $values;
@@ -355,7 +355,6 @@ class SudokuSolver extends Command
             }
            
         }
-        exit();
     }
 
     public function filterIndexes($commun) 
