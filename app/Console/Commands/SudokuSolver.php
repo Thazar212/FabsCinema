@@ -408,17 +408,14 @@ class SudokuSolver extends Command
             print("\n\n");
             foreach ($twins as $communIndex => $communValue) {
                 if (strlen($communIndex) === $communValue) {
-                    $indexes = str_split($communIndex);
                     foreach ($catValue as $cellIndex => $cellValue) {
-                        $allTrue = true;
-                        foreach($indexes as $index) {
-                            if (!$this->isKthBitSet($cellValue, $index -1)) {
-                                $allTrue = false;
-                            }
-                        }
+                        $bitsOn = $this->getBitsOn($cellValue);
+                        if ($communIndex === $bitsOn[0]) {
+                            continue;
+                        } 
                         for ($n = 0; $n < strlen($cellValue); $n++) {
                             if ($this->isKthBitSet($cellValue, $n)) {
-                                if ((in_array($n + 1, $indexes) && !$allTrue) || (!in_array($n + 1, $indexes) && $allTrue)) {
+                                if (in_array($n + 1, $indexes)) {
                                     $values = $this->turnOffK($cellValue, $n + 1);
                                     $pos = $this->findPosition($values);
                                     if ($pos === -1) {
