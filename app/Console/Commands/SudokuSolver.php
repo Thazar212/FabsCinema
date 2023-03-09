@@ -428,7 +428,8 @@ class SudokuSolver extends Command
                                         $this->fillSolution($cellIndex, $pos);
                                         print("solution: {$cellIndex} => {$pos} \n");
                                     }
-                                    print("remove value {$pos} fron cell {$cellIndex}\n");
+                                    $l = $n + 1;
+                                    print("remove value {$l} fron cell {$cellIndex}\n");
                                 }
                             }
                         }
