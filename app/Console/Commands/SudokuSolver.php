@@ -117,11 +117,16 @@ class SudokuSolver extends Command
             }   
 
             $this->checkfortwins('cell');            
+            
+            $this->t = $this->z;
+
             if ($this->t  === true) {
                 continue;
             }   
 
-            $this->t = $this->z;
+            $this->sortTriangles();
+            exit();
+
 
 
         }
@@ -374,7 +379,7 @@ class SudokuSolver extends Command
         }
     }
 
-    public function checkfortwins($cat) 
+    private function checkfortwins($cat) 
     {
         $this->setLevel(4);
         $category = [];
@@ -458,4 +463,16 @@ class SudokuSolver extends Command
         return $commun;
     }
 
+    private function sortTriangles() 
+    {
+        $twos = [];
+        foreach($this->grid as $k => $v) {
+            $bitsOn = $this->getBitsOn($v['values']);
+            if ($bitsOn[2] == 2) {
+                $v['indesx'] = $k;
+                $twos[] = $v;
+            }  
+        }
+        print_r($twos);
+    }
 }
