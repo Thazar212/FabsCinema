@@ -335,7 +335,6 @@ class SudokuSolver extends Command
                     for ($n = 0; $n < strlen($cellValue); $n++) {
                         if ($this->isKthBitSet($cellValue, $n) && $this->isKthBitSet($cellValue2, $n)) {
                             $communIndex .= strval($n + 1);
-
                         }
                     }
                     if ($communIndex) {
@@ -469,10 +468,42 @@ class SudokuSolver extends Command
         foreach($this->grid as $k => $v) {
             $bitsOn = $this->getBitsOn($v['values']);
             if ($bitsOn[2] == 2) {
-                $v['indesx'] = $k;
+                $v['index'] = $k;
+                $v['bitsOnString'] = $bitsOn[0];
+                $v['bitsOnArray'] = $bitsOn[1];
                 $twos[] = $v;
             }  
         }
-        print_r($twos);
+
+        foreach ($twos as $two) {
+            $triangles = [];
+            $triangle = [];
+            $triangle[] =  $two;
+            foreach ($twos as $too) {
+                if ($two['index'] === $too['index'] || $two['bitsOnString'] === $too['bitsOnString']) {
+                    continue;
+                }
+                
+                foreach ($two['bitsOnArray'] as $bitOn) {
+                    foreach ($too['bitsOnArray'] as $bitOn2) {
+                        if ($bitOn === $bitOn2 ) {
+                            if (count($triangle) === 1) {
+                                $triangle[] = $too;
+                            } else {
+                                if ($triangle[1]['index'] === $too['index']) {
+                                    continue(2);
+                                }
+                                $triangle[] = $too;
+                                $triangles[] = $triangle;
+                                $triangle = [];
+                                $triangle[] =  $two;
+                            }
+
+                        }
+                    }    
+                }
+            }
+        } 
+        print_r($riangles);
     }
 }
