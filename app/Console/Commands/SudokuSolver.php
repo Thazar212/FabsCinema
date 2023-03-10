@@ -504,6 +504,6 @@ class SudokuSolver extends Command
                 }
             }
         } 
-        print_r($riangles);
+        print_r($triangles);
     }
 }
