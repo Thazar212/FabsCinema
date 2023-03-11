@@ -525,7 +525,9 @@ class SudokuSolver extends Command
                                         $corner3 = true;
                                     }
                                 }
-                                $triangles[$key]['corners'][$key2]['corners'][$key3] = $triangle3;
+                                if ($corner3) {
+                                    $triangles[$key]['corners'][$key2]['corners'][$key3] = $triangle3;
+                                }
                                
                             }
                             
