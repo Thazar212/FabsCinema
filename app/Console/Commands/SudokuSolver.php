@@ -501,6 +501,13 @@ class SudokuSolver extends Command
                 }
             }
         } 
+
+        foreach ($triangles as $key => $triangle) {
+            foreach ($triangle as $key2 => $triangle2) {
+                $triangles[$key]['corners'][$key2]['corners'] = [];
+            }
+        } 
+
         print_r($triangles);
     }
 }
