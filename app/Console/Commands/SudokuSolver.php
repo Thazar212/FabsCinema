@@ -508,6 +508,15 @@ class SudokuSolver extends Command
             }
         } 
 
-        print_r($triangles);
+        foreach ($triangles as $key => $triangle) {
+            print_r($triangle);
+
+            print("\n");
+            print("\n");
+            print($key);
+            print("\n");
+            
+
+        }
     }
 }
