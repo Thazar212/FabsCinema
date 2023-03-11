@@ -464,41 +464,37 @@ class SudokuSolver extends Command
 
     private function sortTriangles() 
     {
-        $twos = [];
+        $triangles = [];
         foreach($this->grid as $k => $v) {
             $bitsOn = $this->getBitsOn($v['values']);
             if ($bitsOn[2] == 2) {
-                $v['index'] = $k;
                 $v['bitsOnString'] = $bitsOn[0];
                 $v['bitsOnArray'] = $bitsOn[1];
-                $twos[] = $v;
+                $v = ['corners'] = [];
+                $triangles[$k] = $v;
             }  
         }
 
-        foreach ($twos as $two) {
-            $triangles = [];
-            $triangle = [];
-            $triangle[] =  $two;
-            foreach ($twos as $too) {
-                if ($two['index'] === $too['index'] || $two['bitsOnString'] === $too['bitsOnString']) {
+        foreach ($triangles as $key => $triangle) {
+            foreach ($triangles as $key2 => $triangle2) {
+                if ($key === $key2 || $triangle['bitsOnString'] === $triangle2['bitsOnString']) {
                     continue;
                 }
                 
-                foreach ($two['bitsOnArray'] as $bitOn) {
-                    foreach ($too['bitsOnArray'] as $bitOn2) {
-                        if ($bitOn === $bitOn2 ) {
-                            if (count($triangle) === 1) {
-                                $triangle[] = $too;
-                            } else {
-                                if ($triangle[1]['index'] === $too['index']) {
-                                    continue(2);
-                                }
-                                $triangle[] = $too;
-                                $triangles[] = $triangle;
-                                $triangle = [];
-                                $triangle[] =  $two;
+                foreach ($triangle['bitsOnArray'] as $bitOn) {
+                    foreach ($triangle2['bitsOnArray'] as $bitOn2) {
+                        if ($bitOn === $bitOn2) {
+                            $triangle2['commun'] = [];
+                            if ($triangle['cell'] === $triangle['cell']) {
+                                $triangle2['commun'][] = 'cell';
+                            } if ($triangle['row'] === $triangle['row']) {
+                                $triangle2['commun'][] = 'row';
+                            } if ($triangle['column'] === $triangle['column']) {
+                                $triangle2['commun'][] = 'column';
                             }
-
+                        }
+                        if (count($triangle2['commun']) > 0) {
+                            $triangles[$key]['corners'][$key2] = $triangle2;
                         }
                     }    
                 }
