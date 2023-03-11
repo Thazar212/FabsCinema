@@ -523,7 +523,7 @@ class SudokuSolver extends Command
                                 foreach ($cornerTypes as $cornerType) {
                                     if ($triangle2[$cornerType] === $triangle3[$cornerType] && !in_array($cornerType, $triangle2['commun']) ) {
                                         $corner3 = true;
-                                     }
+                                    }
                                 }
                                 $triangles[$key]['corners'][$key2]['corners'][$key3] = $triangle3;
                                
@@ -534,6 +534,7 @@ class SudokuSolver extends Command
 
                 }     
             }
+        }
         print_r($triangles);
         
     }
