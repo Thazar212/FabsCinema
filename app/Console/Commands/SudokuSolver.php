@@ -522,7 +522,7 @@ class SudokuSolver extends Command
                     $bitsOn3 = $triangle3['bitsOnArray'];
 
                     $corner3 =false;
-                    if ((in_array($bitsOn3[0],$bitsOn2) || in_array($bitsOn3[1],$bitsOn2)) && (in_array($bitsOn3[0],$bitsOn) || in_array($bitsOn3[1],$bitsOn)))
+                    if ((in_array($bitsOn3[0],$bitsOn2) || in_array($bitsOn3[1],$bitsOn2)) && (in_array($bitsOn3[0],$bitsOn) || in_array($bitsOn3[1],$bitsOn))) {
                         foreach ($cornerTypes as $cornerType) {
                             if ($triangle2[$cornerType] === $triangle3[$cornerType] && !in_array($cornerType, $triangle2['commun']) ) {
                                 $corner3 = true;
