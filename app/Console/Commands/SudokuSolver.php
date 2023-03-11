@@ -509,31 +509,29 @@ class SudokuSolver extends Command
             }
         } 
 
+        $cornerTypes = ['cell', 'row', 'column'];
+                    
         foreach ($triangles as $key => $triangle) {
             foreach ($triangle['corners'] as $key2 => $triangle2) {
                 foreach ($triangle['corners'] as $key3 => $triangle3) {
                     if ($key === $key3 || $key2 === $key3 || $triangle['bitsOnString'] === $triangle3['bitsOnString'] || $triangle2['bitsOnString'] === $triangle3['bitsOnString']) {
                         continue;
                     }
-                    foreach ($triangle2['bitsOnArray'] as $bitOn) {
-                        foreach ($triangle3['bitsOnArray'] as $bitOn2) {
-                            if ($bitOn === $bitOn2) {
-                                $corner3 = false;
-                                $cornerTypes = ['cell', 'row', 'column'];
-                                foreach ($cornerTypes as $cornerType) {
-                                    if ($triangle2[$cornerType] === $triangle3[$cornerType] && !in_array($cornerType, $triangle2['commun']) ) {
-                                        $corner3 = true;
-                                    }
-                                }
-                                if ($corner3) {
-                                    $triangles[$key]['corners'][$key2]['corners'][$key3] = $triangle3;
-                                }
-                               
-                            }
-                            
-                        }    
-                    }
+                    $bitsOn1 = $triangle['bitsOnArray'];
+                    $bitsOn2 = $triangle2['bitsOnArray'];
+                    $bitsOn3 = $triangle3['bitsOnArray'];
 
+                    $corner3 =false;
+                    if ((in_array($bitsOn3[0],$bitsOn2) || in_array($bitsOn3[1],$bitsOn2)) && (in_array($bitsOn3[0],$bitsOn) || in_array($bitsOn3[1],$bitsOn)))
+                        foreach ($cornerTypes as $cornerType) {
+                            if ($triangle2[$cornerType] === $triangle3[$cornerType] && !in_array($cornerType, $triangle2['commun']) ) {
+                                $corner3 = true;
+                            }
+                        }
+                        if ($corner3) {
+                            $triangles[$key]['corners'][$key2]['corners'][$key3] = $triangle3;
+                        }   
+                    }
                 }     
             }
         }
