@@ -535,6 +535,22 @@ class SudokuSolver extends Command
                 }     
             }
         }
+
+        foreach ($triangles as $key => $triangle) {
+            foreach ($triangle['corners'] as $key2 => $triangle2) {
+                if (count($triangle2['corners']) === 0) {
+                    unset($triangles[$key]['corners'][$key2]);
+                }
+            }
+        }
+
+        foreach ($triangles as $key => $triangle) {
+            if (count($triangle['corners']) === 0) {
+                unset($triangles[$key]);
+            }
+        }
+
+
         print_r($triangles);
         
     }
