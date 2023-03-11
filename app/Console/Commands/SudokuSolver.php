@@ -492,7 +492,7 @@ class SudokuSolver extends Command
                             } if ($triangle['column'] === $triangle2['column']) {
                                 $triangle2['commun'][] = 'column';
                             }
-                            if (count($triangle2['commun']) > 0 && is_numeric($key2)) {
+                            if (count($triangle2['commun']) > 0) {
                                 $triangles[$key]['corners'][$key2] = $triangle2;
                             }
                         }
@@ -503,8 +503,9 @@ class SudokuSolver extends Command
         } 
 
         foreach ($triangles as $key => $triangle) {
-            foreach ($triangle as $key2 => $triangle2) {
-                $triangles[$key]['corners'][$key2]['corners'] = [];
+            foreach ($triangle['corners'] as $key2 => $triangle2) {
+                    $triangles[$key]['corners'][$key2]['corners'] = [];
+                
             }
         } 
 
