@@ -492,10 +492,11 @@ class SudokuSolver extends Command
                             } if ($triangle['column'] === $triangle['column']) {
                                 $triangle2['commun'][] = 'column';
                             }
+                            if (count($triangle2['commun']) > 0) {
+                                $triangles[$key]['corners'][$key2] = $triangle2;
+                            }
                         }
-                        if (count($triangle2['commun']) > 0) {
-                            $triangles[$key]['corners'][$key2] = $triangle2;
-                        }
+                        
                     }    
                 }
             }
