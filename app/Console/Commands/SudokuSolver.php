@@ -470,7 +470,7 @@ class SudokuSolver extends Command
             if ($bitsOn[2] == 2) {
                 $v['bitsOnString'] = $bitsOn[0];
                 $v['bitsOnArray'] = $bitsOn[1];
-                $v = ['corners'] = [];
+                $v['corners'] = [];
                 $triangles[$k] = $v;
             }  
         }
