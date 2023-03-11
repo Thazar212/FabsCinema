@@ -515,7 +515,7 @@ class SudokuSolver extends Command
             print("\n");
             print($key);
             print("\n");
-            
+            exit();
 
         }
     }
