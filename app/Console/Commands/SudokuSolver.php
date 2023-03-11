@@ -124,9 +124,8 @@ class SudokuSolver extends Command
                 continue;
             }   
 
-            $this->sortTriangles();
-            exit();
-
+            //$this->sortTriangles();
+            
 
 
         }
