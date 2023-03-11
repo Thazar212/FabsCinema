@@ -485,11 +485,11 @@ class SudokuSolver extends Command
                     foreach ($triangle2['bitsOnArray'] as $bitOn2) {
                         if ($bitOn === $bitOn2) {
                             $triangle2['commun'] = [];
-                            if ($triangle['cell'] === $triangle['cell']) {
+                            if ($triangle['cell'] === $triangle2['cell']) {
                                 $triangle2['commun'][] = 'cell';
-                            } if ($triangle['row'] === $triangle['row']) {
+                            } if ($triangle['row'] === $triangle2['row']) {
                                 $triangle2['commun'][] = 'row';
-                            } if ($triangle['column'] === $triangle['column']) {
+                            } if ($triangle['column'] === $triangle2['column']) {
                                 $triangle2['commun'][] = 'column';
                             }
                             if (count($triangle2['commun']) > 0) {
