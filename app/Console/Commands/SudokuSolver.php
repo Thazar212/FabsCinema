@@ -509,6 +509,31 @@ class SudokuSolver extends Command
             }
         } 
 
+        foreach ($triangles as $key => $triangle) {
+            foreach ($triangle['corners'] as $key2 => $triangle2) {
+                foreach ($triangle['corners'] as $key3 => $triangle3) {
+                    if ($key === $key3 || $key2 === $key3 || $triangle['bitsOnString'] === $triangle3['bitsOnString'] || $triangle2['bitsOnString'] === $triangle3['bitsOnString']) {
+                        continue;
+                    }
+                    foreach ($triangle2['bitsOnArray'] as $bitOn) {
+                        foreach ($triangle3['bitsOnArray'] as $bitOn2) {
+                            if ($bitOn === $bitOn2) {
+                                $corner3 = false;
+                                $cornerTypes = ['cell', 'row', 'column'];
+                                foreach ($cornerTypes as $cornerType) {
+                                    if ($triangle2[$cornerType] === $triangle3[$cornerType] && !in_array($cornerType, $triangle2['commun']) ) {
+                                        $corner3 = true;
+                                     }
+                                }
+                                $triangles[$key]['corners'][$key2]['corners'][$key3] = $triangle3;
+                               
+                            }
+                            
+                        }    
+                    }
+
+                }     
+            }
         print_r($triangles);
         
     }
