@@ -475,6 +475,9 @@ class SudokuSolver extends Command
             }  
         }
 
+        print_r($triangles); 
+        exit();
+
         foreach ($triangles as $key => $triangle) {
             foreach ($triangles as $key2 => $triangle2) {
                 if ($key === $key2 || $triangle['bitsOnString'] === $triangle2['bitsOnString']) {
